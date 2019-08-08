@@ -1,6 +1,6 @@
 # Deckbuilding API
 
-This API will manage the creation of decks, collections, and posts for an application. Users will be able to log in and create/view decks, manage a collection of cards, and post comments on their decks and other users&#39; decks.
+This API will manage the creation of decks, collections, and posts for an application. Users will be able to log in and create/view decks, manage a collection of cards, and post comments on their decks and other users' decks.
 
 ## Models
 
@@ -191,22 +191,24 @@ The endpoints will be as follows:
 - Method:
   - GET
 - Headers:
-  - ```json 
-    {
-        "authentication": "Bearer " + JWT
-    }
+  - ```json
+        {
+            "authentication": "Bearer " + JWT
+        }
 - Body:
   - None
 - Response:
   - Status Code 200 OK
-    - ```json {
-         "token": JWT valid for 3 days
-}
+    - ```json
+        {
+            "token": JWT valid for 3 days
+        }
 - ERROR RESPONSE(S):
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Invalid JWT Supplied"
-}
+    - ```json 
+        {
+            "message": "Invalid JWT Supplied"
+        }
 
 ### POST /user
 
@@ -219,21 +221,24 @@ The endpoints will be as follows:
 - Headers:
   - none
 - Body:
-  - ```json {
-         "username": "string",
-         "password": "string",
-         "email": "string"
-}
+  - ```json 
+        {
+            "username": "string",
+            "password": "string",
+            "email": "string"
+        }
 - Response:
   - Status Code 201 CREATED
 - ERROR RESPONSE(S):
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Username is taken"
-}
-    - ```json {
-         "message": "Email already exists in our system."
-}
+    - ```json 
+        {
+            "message": "Username is taken"
+        }
+    - ```json 
+        {
+            "message": "Email already exists in our system."
+        }
 
 ### PATCH /user
 
@@ -244,27 +249,31 @@ The endpoints will be as follows:
 - Method:
   - PATCH
 - Headers:
-  - ```json {
-        "authentication": "Bearer " + JWT
-}
+  - ```json 
+        {
+            "authentication": "Bearer " + JWT
+        }
 - Body:
-  - ```json {
-         "username": "string",
-         "password": "string",
-         "firstName": "string",
-         "lastName": "string",
-         "email": "string"
-}
+  - ```json 
+        {
+            "username": "string",
+            "password": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "email": "string"
+        }
 - Response:
   - Status Code 200 OK
 - ERROR RESPONSE(S):
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Username is taken"
-}
-    - ```json {
-         "message": "Email already exists in our system."
-}
+    - ```json 
+        {
+            "message": "Username is taken"
+        }
+    - ```json 
+        {
+            "message": "Email already exists in our system."
+        }
 
 ### POST /deck
 
@@ -275,39 +284,45 @@ The endpoints will be as follows:
 - Method:
   - POST
 - Headers:
-  - ```json {
-        "authentication": "Bearer " + JWT
-}
+  - ```json 
+        {
+            "authentication": "Bearer " + JWT
+        }
 - Body:
-  - ```json {
-         "deckName": "string",
-         "deckDescription": "string",
-         "deckFormat":  "string",
-         "deckPrivacy": "boolean,
-         "deckPrototype": "boolean",
-         "deckFeaturedCard": "string",
-         "cardIDs": [
-                 "cid1": "number",
-                 "cid2": "number",
-                 … etc
-         ]
-}
+  - ```json 
+        {
+            "deckName": "string",
+            "deckDescription": "string",
+            "deckFormat":  "string",
+            "deckPrivacy": "boolean",
+            "deckPrototype": "boolean",
+            "deckFeaturedCard": "string",
+            "cardIDs": [
+                    "cid1": "number",
+                    "cid2": "number",
+                    … etc
+            ]
+        }
 - Response:
   - Status Code 201 Created
 - ERROR RESPONSE(S):
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Deck must have a name"
-}
-    - ```json {
-         "message": "Deck must have a description"
-}
-    - ```json {
-         "message": "Deck must have a name"
-}
-    - ```json {
-         "message": "Deck must have at least one card in it"
-}
+    - ```json 
+        {
+            "message": "Deck must have a name"
+        }
+    - ```json 
+        {
+            "message": "Deck must have a description"
+        }
+    - ```json 
+        {
+            "message": "Deck must have a name"
+        }
+    - ```json 
+        {
+            "message": "Deck must have at least one card in it"
+        }
 
 ### GET /deck
 
@@ -319,9 +334,10 @@ The endpoints will be as follows:
   - GET
 - Headers:
   - Headers will be optional on this endpoint. Anyone should be able to view any public decks.
-  - ```json {
-        "authentication": "Bearer " + JWT
-}
+  - ```json 
+        {
+            "authentication": "Bearer " + JWT
+        }
 - Parameters:
   - userid=:id
     - returns decks by a specific user. If currently logged in user matches this, will show them their private decks too.
@@ -331,26 +347,30 @@ The endpoints will be as follows:
   - None
 - Response:
   - Status Code 200 OK
-    - ```json {
-         "decks": [
-                 deck Object 1,
-                 deck Object 2
-                 … etc
-         ]
-}
+    - ```json 
+        {
+            "decks": [
+                    deck Object 1,
+                    deck Object 2
+                    … etc
+            ]
+        }
 - ERROR RESPONSE(S):
-  - Status Code 404 DOESN&#39;T EXIST
-    - ```json {
-         "message": "No decks exist matching those criteria."
-}
+  - Status Code 404 DOESN'T EXIST
+    - ```json 
+        {
+            "message": "No decks exist matching those criteria."
+        }
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Deck is private"
-}
+    - ```json 
+        {
+            "message": "Deck is private"
+        }
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Not valid search parameters"
-}
+    - ```json 
+        {
+            "message": "Not valid search parameters"
+        }
 
 ### PATCH /deck
 
@@ -361,33 +381,37 @@ The endpoints will be as follows:
 - Method:
   - PATCH
 - Headers:
-  - ```json {
-        "authentication": "Bearer " + JWT
-}
+  - ```json
+        {
+            "authentication": "Bearer " + JWT
+        }
 - Body:
-  - ```json {
-         "deckName": "string",
-         "deckDescription": "string",
-         "deckFormat":  "string",
-         "deckPrivacy": "boolean,
-         "deckPrototype": "boolean",
-         "deckFeaturedCard": "string",
-         "cardIDs": [
-                 "cid1": "number",
-                 "cid2": "number",
-                 … etc
-         ]
-}
+  - ```json 
+        {
+            "deckName": "string",
+            "deckDescription": "string",
+            "deckFormat":  "string",
+            "deckPrivacy": "boolean",
+            "deckPrototype": "boolean",
+            "deckFeaturedCard": "string",
+            "cardIDs": [
+                    "cid1": "number",
+                    "cid2": "number",
+                    … etc
+            ]
+        }
 - Response:
   - Status Code 200 OK
-    - ```json {
-         "message": "Deck updated successfully."
-}
+    - ```json 
+        {
+            "message": "Deck updated successfully."
+        }
 - ERROR RESPONSE(S):
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Deck not updated."
-}
+    - ```json 
+        {
+            "message": "Deck not updated."
+        }
 
 ### POST /collection
 
@@ -398,37 +422,43 @@ The endpoints will be as follows:
 - Method:
   - POST
 - Headers:
-  - ```json {
-        "authentication": "Bearer " + JWT
-}
+  - ```json 
+        {
+            "authentication": "Bearer " + JWT
+        }
 - Body:
-  - ```json {
-         "collectionName": "string",
-         "collectionDescription": "string",
-         "collectionPrivacy": "boolean,
-         "collectionFeaturedCard": "string",
-         "cardIDs": [
-                 "cid1": "number",
-                 "cid2": "number",
-                 … etc
-         ]
-}
+  - ```json 
+        {
+            "collectionName": "string",
+            "collectionDescription": "string",
+            "collectionPrivacy": "boolean",
+            "collectionFeaturedCard": "string",
+            "cardIDs": [
+                    "cid1": "number",
+                    "cid2": "number",
+                    … etc
+            ]
+        }
 - Response:
   - Status Code 201 Created
 - ERROR RESPONSE(S):
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Collection must have a name"
-}
-    - ```json {
-         "message": "Collection must have a description"
-}
-    - ```json {
-         "message": "Collection must have a name"
-}
-    - ```json {
-         "message": "Collection must have at least one card in it"
-}
+    - ```json 
+        {
+            "message": "Collection must have a name"
+        }
+    - ```json 
+        {
+            "message": "Collection must have a description"
+        }
+    - ```json 
+        {
+            "message": "Collection must have a name"
+        }
+    - ```json 
+        {
+            "message": "Collection must have at least one card in it"
+        }
 
 ### GET /collection
 
@@ -440,9 +470,10 @@ The endpoints will be as follows:
   - GET
 - Headers:
   - Headers will be optional on this endpoint. Anyone should be able to view any public collections.
-  - ```json {
-        "authentication": "Bearer " + JWT
-}
+  - ```json 
+        {
+            "authentication": "Bearer " + JWT
+        }
 - Parameters:
   - userid=:id
     - returns collections by a specific user. If currently logged in user matches this, will show them their private collections too.
@@ -452,26 +483,30 @@ The endpoints will be as follows:
   - None
 - Response:
   - Status Code 200 OK
-    - ```json {
-         "collections": [
-                 collection Object 1,
-                 collection Object 2
-                 … etc
-         ]
-}
+    - ```json 
+        {
+            "collections": [
+                    collection Object 1,
+                    collection Object 2
+                    … etc
+            ]
+        }
 - ERROR RESPONSE(S):
-  - Status Code 404 DOESN&#39;T EXIST
-    - ```json {
-         "message": "No collections exist matching those criteria."
-}
+  - Status Code 404 DOESN'T EXIST
+    - ```json 
+        {
+            "message": "No collections exist matching those criteria."
+        }
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Collection is private"
-}
+    - ```json 
+        {
+            "message": "Collection is private"
+        }
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Not valid search parameters"
-}
+    - ```json 
+        {
+            "message": "Not valid search parameters"
+        }
 
 ### PATCH /collection
 
@@ -482,31 +517,35 @@ The endpoints will be as follows:
 - Method:
   - PATCH
 - Headers:
-  - ```json {
-        "authentication": "Bearer " + JWT
-}
+  - ```json 
+        {
+            "authentication": "Bearer " + JWT
+        }
 - Body:
-  - ```json {
-         "collectionName": "string",
-         "collectionDescription": "string",
-         "collectionPrivacy": "boolean,
-         "collectionFeaturedCard": "string",
-         "cardIDs": [
-                 "cid1": "number",
-                 "cid2": "number",
-                 … etc
-         ]
-}
+  - ```json 
+        {
+            "collectionName": "string",
+            "collectionDescription": "string",
+            "collectionPrivacy": "boolean",
+            "collectionFeaturedCard": "string",
+            "cardIDs": [
+                    "cid1": "number",
+                    "cid2": "number",
+                    … etc
+            ]
+        }
 - Response:
   - Status Code 200 OK
-    - ```json {
-         "message": "Collection updated successfully."
-}
+    - ```json 
+        {
+            "message": "Collection updated successfully."
+        }
 - ERROR RESPONSE(S):
   - Status Code 400 BAD REQUEST
-    - ```json {
-         "message": "Collection not updated."
-}
+    - ```json 
+        {
+            "message": "Collection not updated."
+        }
 
 # Stretch Goals
 
