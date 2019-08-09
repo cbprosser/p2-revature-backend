@@ -48,13 +48,13 @@ CREATE TABLE td_collection (
     collection_prototype BOOLEAN NOT NULL DEFAULT true,
     collection_creation_date TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT current_timestamp,
     collection_last_updated TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT current_timestamp,
-    collection_featured_card TEXT NOT NULL
+    collection_featured_card TEXT
 );
 
 CREATE TABLE td_collection_cards (
     collection_cards_id SERIAL PRIMARY KEY,
 	collection_id INTEGER REFERENCES td_collection(collection_id) NOT NULL,
-	collection_card TEXT,
+	collection_card TEXT NOT NULL,
 	collection_card_amount INTEGER NOT NULL,
     UNIQUE (collection_id, collection_card)
 );
