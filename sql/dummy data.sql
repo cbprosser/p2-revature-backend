@@ -20,7 +20,6 @@ INSERT INTO td_formats (format)
 VALUES ('Commander'), ('Standard'), ('Modern'), ('Pauper'), ('Brawl'), ('Legacy'), ('Vintage');
 
 
-
 INSERT INTO td_deck (deck_author, deck_name, deck_description, deck_format)
 VALUES ((SELECT user_id FROM td_user WHERE username = 'cbprosser'), 'deck1', 'no description', (SELECT format_id FROM td_formats WHERE format='Standard')),
 	   ((SELECT user_id FROM td_user WHERE username = 'hatebear'), 'deck1', 'no description', (SELECT format_id FROM td_formats WHERE format='Standard')),
