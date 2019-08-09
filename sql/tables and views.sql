@@ -54,7 +54,7 @@ CREATE TABLE td_collection (
 CREATE TABLE td_collection_cards (
     collection_cards_id SERIAL PRIMARY KEY,
 	collection_id INTEGER REFERENCES td_collection(collection_id) NOT NULL,
-	collection_card TEXT NOT NULL,
+	collection_card TEXT,
 	collection_card_amount INTEGER NOT NULL,
     UNIQUE (collection_id, collection_card)
 );
