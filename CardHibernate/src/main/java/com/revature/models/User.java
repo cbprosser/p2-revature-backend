@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +15,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
+
 	private int userId;
 
 	private String username;
@@ -26,26 +29,19 @@ public class User {
 	@Column(name = "last_name")
 	private String lastName;
 
-	private String phone;
-
 	private String email;
 
-	private String role;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private Role role;
 
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public User(int userId, String username, String password, String firstName, String lastName, String phone,
-			String email, String role) {
-		super();
+	public User(int userId, String username, String password, String firstName, String lastName, String email,
+			Role role) {
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.phone = phone;
 		this.email = email;
 		this.role = role;
 	}
@@ -90,14 +86,6 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -106,11 +94,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
@@ -122,7 +110,6 @@ public class User {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -158,11 +145,6 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (phone == null) {
-			if (other.phone != null)
-				return false;
-		} else if (!phone.equals(other.phone))
-			return false;
 		if (role == null) {
 			if (other.role != null)
 				return false;
@@ -180,9 +162,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", phone=" + phone + ", email=" + email + ", role=" + role
-				+ "]";
+		return "User [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
+				+ ", role=" + role + ", userId=" + userId + ", username=" + username + "]";
 	}
 
 }
