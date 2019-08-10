@@ -1,3 +1,5 @@
+package com.revature.models;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +10,11 @@ import javax.persistence.Id;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     @Column(name = "role_id")
     private int role_Id;
 
+    @Column(name = "role")
     private String name;
 
     public Role(int role_Id, String name) {
