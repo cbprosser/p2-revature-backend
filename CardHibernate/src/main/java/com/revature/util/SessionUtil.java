@@ -11,10 +11,9 @@ public class SessionUtil {
 	static {
 		Configuration configuration = new Configuration().configure();
 		configuration.setProperty("hibernate.connection.url",
-				"jdbc:postgresql://" + System.getenv("ICE_CREAM_URL") + ":5432/ice_cream");
-		configuration.setProperty("hibernate.connection.username", System.getenv("ICE_CREAM_USERNAME"));
-		configuration.setProperty("hibernate.connection.password", System.getenv("ICE_CREAM_PASSWORD"));
-//		configuration.setProperty("hibernate.default_schema", System.getenv("ICE_CREAM_SCHEMA"));
+				"jdbc:postgresql://" + System.getenv("TD_API_URL") + ":5432/td_api");
+		configuration.setProperty("hibernate.connection.username", System.getenv("TD_API_USERNAME"));
+		configuration.setProperty("hibernate.connection.password", System.getenv("TD_API_PASSWORD"));
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
