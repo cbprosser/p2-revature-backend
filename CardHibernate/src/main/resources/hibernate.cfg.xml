@@ -9,11 +9,13 @@
 		
 		<!--  <property name="hibernate.hbm2ddl.auto">create</property> -->
 		<!-- Annotated Class Mappings -->
-		<mapping class="com.revature.models.IceCream"/>
 		<mapping class="com.revature.models.User"/>
-		<mapping class="com.revature.models.Brand"/>
-		<mapping class="com.revature.models.Flavor"/>
-		<mapping class="com.revature.models.Topping"/>
+		<mapping class="com.revature.models.Role"/>
+		<mapping class="com.revature.models.Deck"/>
+		<mapping class="com.revature.models.DeckCard"/>
+		<mapping class="com.revature.models.Collection"/>
+		<mapping class="com.revature.models.CollectionCard"/>
+		
 		
 	</session-factory>
 </hibernate-configuration>
