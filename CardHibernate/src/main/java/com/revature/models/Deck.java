@@ -7,10 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="td_deck")
+@Table(name = "td_deck")
 public class Deck {
 
 	@Id
@@ -18,7 +20,8 @@ public class Deck {
 	@Column(name = "deck_id")
 	private int id;
 
-	@Column(name = "deck_author")
+	@ManyToOne
+    @JoinColumn(name = "deck_author")
 	private User author;
 
 	@Column(name = "deck_name")
@@ -39,7 +42,8 @@ public class Deck {
 	@Column(name = "deck_last_updated")
 	private LocalDate lastUpdatedDate;
 
-	@Column(name = "deck_format")
+	@ManyToOne
+	@JoinColumn(name = "deck_format")
 	private Formats format;
 
 	@Column(name = "deck_featured_card")

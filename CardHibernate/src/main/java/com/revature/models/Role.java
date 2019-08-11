@@ -5,29 +5,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "td_role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
     @Column(name = "role_id")
-    private int role_Id;
+    private int roleID;
 
     @Column(name = "role")
     private String name;
 
-    public Role(int role_Id, String name) {
-        this.role_Id = role_Id;
+    public Role(int roleID, String name) {
+        this.roleID = roleID;
         this.name = name;
     }
 
     public int getRole_Id() {
-        return role_Id;
+        return roleID;
     }
 
-    public void setRole_Id(int role_Id) {
-        this.role_Id = role_Id;
+    public void setRole_Id(int roleID) {
+        this.roleID = roleID;
     }
 
     public String getName() {
@@ -43,7 +44,7 @@ public class Role {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + role_Id;
+        result = prime * result + roleID;
         return result;
     }
 
@@ -61,14 +62,17 @@ public class Role {
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (role_Id != other.role_Id)
+        if (roleID != other.roleID)
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "role [name=" + name + ", role_Id=" + role_Id + "]";
+        return "role [name=" + name + ", roleID=" + roleID + "]";
+    }
+
+    public Role() {
     }
 
 }

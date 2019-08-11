@@ -10,12 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "td_user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-	@Column(name = "user_id";
+	@Column(name = "user_id")
 	private int userId;
 
 	@Column(name = "username")
@@ -166,6 +165,9 @@ public class User {
 	public String toString() {
 		return "User [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
 				+ ", role=" + role + ", userId=" + userId + ", username=" + username + "]";
+	}
+
+	public User() {
 	}
 
 }

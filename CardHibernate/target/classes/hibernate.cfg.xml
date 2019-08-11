@@ -15,6 +15,7 @@
 		<mapping class="com.revature.models.DeckCard"/>
 		<mapping class="com.revature.models.Collection"/>
 		<mapping class="com.revature.models.CollectionCard"/>
+		<mapping class="com.revature.models.Formats"/>
 		
 		
 	</session-factory>
