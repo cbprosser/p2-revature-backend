@@ -5,45 +5,51 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class CollectionCards {
-
-    @Column(name = "collection_cards_id")
-    private String collectionCardsId;
+public class CollectionCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "collection _id")
-    private int collectionId;
-    
+    @Column(name = "collection_cards_id")
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "collection_id")
+    private Collection collection;
+
     @Column(name = "collection_card")
     private String collectionCard;
 
-    @Column(name = "amount")
+    @Column(name = "collection_card_amount")
     private int amount;
 
-    public CollectionCards(String collectionCardsId, int collectionId, String collectionCard, int amount) {
-        this.collectionCardsId = collectionCardsId;
-        this.collectionId = collectionId;
+    public CollectionCard() {
+    }
+
+    public CollectionCard(int id, Collection collection, String collectionCard, int amount) {
+        this.id = id;
+        this.collection = collection;
         this.collectionCard = collectionCard;
         this.amount = amount;
     }
 
-    public String getCollectionCardsId() {
-        return collectionCardsId;
+    public int getId() {
+        return id;
     }
 
-    public void setCollectionCardsId(String collectionCardsId) {
-        this.collectionCardsId = collectionCardsId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getCollectionId() {
-        return collectionId;
+    public Collection getCollection() {
+        return collection;
     }
 
-    public void setCollectionId(int collectionId) {
-        this.collectionId = collectionId;
+    public void setCollection(Collection collection) {
+        this.collection = collection;
     }
 
     public String getCollectionCard() {
@@ -67,9 +73,9 @@ public class CollectionCards {
         final int prime = 31;
         int result = 1;
         result = prime * result + amount;
+        result = prime * result + ((collection == null) ? 0 : collection.hashCode());
         result = prime * result + ((collectionCard == null) ? 0 : collectionCard.hashCode());
-        result = prime * result + ((collectionCardsId == null) ? 0 : collectionCardsId.hashCode());
-        result = prime * result + collectionId;
+        result = prime * result + id;
         return result;
     }
 
@@ -81,28 +87,28 @@ public class CollectionCards {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        CollectionCards other = (CollectionCards) obj;
+        CollectionCard other = (CollectionCard) obj;
         if (amount != other.amount)
+            return false;
+        if (collection == null) {
+            if (other.collection != null)
+                return false;
+        } else if (!collection.equals(other.collection))
             return false;
         if (collectionCard == null) {
             if (other.collectionCard != null)
                 return false;
         } else if (!collectionCard.equals(other.collectionCard))
             return false;
-        if (collectionCardsId == null) {
-            if (other.collectionCardsId != null)
-                return false;
-        } else if (!collectionCardsId.equals(other.collectionCardsId))
-            return false;
-        if (collectionId != other.collectionId)
+        if (id != other.id)
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "CollectionCards [amount=" + amount + ", collectionCard=" + collectionCard + ", collectionCardsId="
-                + collectionCardsId + ", collectionId=" + collectionId + "]";
+        return "CollectionCard [amount=" + amount + ", collection=" + collection + ", collectionCard=" + collectionCard
+                + ", id=" + id + "]";
     }
 
 }

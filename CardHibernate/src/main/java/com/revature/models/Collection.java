@@ -6,18 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
-public class CollectionId {
+public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ManyToOne
-    @JoinColumn(name = "collection_id")
+    @Column(name = "collection_id")
     private int id;
 
-    @Column(name = "author")
+    @Column(name = "collection_author")
     private int author;
 
     @Column(name = "collection_private")
@@ -41,7 +38,10 @@ public class CollectionId {
     @Column(name = "collection_featured_card")
     private String featuredCard;
 
-    public CollectionId(int id, int author, boolean collPrivate, boolean prototype, LocalDate creationDate,
+    public Collection() {
+    }
+
+    public Collection(int id, int author, boolean collPrivate, boolean prototype, LocalDate creationDate,
             LocalDate lastUpdated, String name, String description, String featuredCard) {
         this.id = id;
         this.author = author;
@@ -150,7 +150,7 @@ public class CollectionId {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        CollectionId other = (CollectionId) obj;
+        Collection other = (Collection) obj;
         if (CreationDate == null) {
             if (other.CreationDate != null)
                 return false;
@@ -194,5 +194,4 @@ public class CollectionId {
                 + lastUpdated + ", name=" + name + ", prototype=" + prototype + "]";
     }
 
-   
 }
