@@ -11,6 +11,8 @@ public class Driver {
 	public static void main(String[] args) {
 		List<DeckCard> cards = deckDAO.findById(1);
 
-		System.out.println(cards);
+		cards.forEach(card -> {
+			System.out.println(card);
+		});
 	}
 }

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "td_deck")
@@ -20,6 +21,7 @@ public class Deck {
 	@Column(name = "deck_id")
 	private int id;
 
+	@Transient
 	@ManyToOne
     @JoinColumn(name = "deck_author")
 	private User author;
@@ -36,9 +38,11 @@ public class Deck {
 	@Column(name = "deck_prototype")
 	private boolean isPrototype;
 
+	@Transient
 	@Column(name = "deck_creation_date")
 	private LocalDate creationDate;
 
+	@Transient
 	@Column(name = "deck_last_updated")
 	private LocalDate lastUpdatedDate;
 

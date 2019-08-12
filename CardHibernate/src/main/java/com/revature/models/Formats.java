@@ -73,5 +73,10 @@ public class Formats {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Formats [format=" + format + ", id=" + id + "]";
+	}
 	
 }
