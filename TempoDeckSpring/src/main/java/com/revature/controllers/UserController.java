@@ -13,36 +13,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.User;
 import com.revature.models.Deck;
+import com.revature.services.UserService;
 import com.revature.services.UserService;
 
 @RestController
-@RequestMapping("deck")
-public class DeckController {
+@RequestMapping("user")
+public class UserController {
 
     @Autowired
-    private UserService deckService;
+    private UserService userService;
 
      @GetMapping
-     public List<Deck> findAll(){
-         return deckService.findAll();
+     public List<User> findAll(){
+         return userService.findAll();
      }
-
-   
-
-     @GetMapping("/decks/{deck_id}")
-     public Deck findByDeckId(@PathVariable Number deck_id){
-         return deckService.findByDeckId(deck_id);
-     }
-
-    // /**
-    //  * 
-    //  * @param deckId
-    //  */
-    // @DeleteMapping("/{deckId}")
-    // public ResponseEntity<Deck> delete(@PathVariable int deckId){
-    //     Deck updateDeck = deckService.removeDeck(deckId);
-    //     ResponseEntity<Deck> resp = new ResponseEntity<Deck>(updateDeck, HttpStatus.ACCEPTED);
-    //     return resp;
-    // }
-}
+    }
