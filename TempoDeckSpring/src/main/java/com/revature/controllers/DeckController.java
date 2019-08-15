@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Deck;
-import com.revature.services.UserService;
+import com.revature.services.DeckService;
 
 @RestController
 @RequestMapping("deck")
 public class DeckController {
 
     @Autowired
-    private UserService deckService;
+    private DeckService deckService;
 
      @GetMapping
      public List<Deck> findAll(){
@@ -30,9 +30,14 @@ public class DeckController {
 
    
 
-     @GetMapping("/decks/{deck_id}")
-     public Deck findByDeckId(@PathVariable Number deck_id){
-         return deckService.findByDeckId(deck_id);
+     @GetMapping("/{deck_id}")
+     public Deck findByDeckId(@PathVariable("deck_id") int deckId){
+         return deckService.findByDeckId(deckId);
+     }
+
+     @GetMapping("/author/{deck_author}")
+     public List<Deck> findAllDecksByAuthor(@PathVariable("deck_author") int deckAuthor) {
+         return deckService.findAllDecksByAuthor(deckAuthor);
      }
 
     // /**

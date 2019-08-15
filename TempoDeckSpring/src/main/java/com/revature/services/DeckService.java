@@ -18,8 +18,12 @@ public class DeckService {
 		return deckRepo.findAll();
 	}
 
-	public Deck findByDeckId(Number deck_id) {
-		return deckRepo.findById(deck_id);
+	public Deck findByDeckId(int deckId) {
+		return deckRepo.findById(deckId);
+	}
+
+	public List<Deck> findAllDecksByAuthor(int deckAuthor) {
+		return deckRepo.findAllByAuthorUserId(deckAuthor);
 	}
 	
 

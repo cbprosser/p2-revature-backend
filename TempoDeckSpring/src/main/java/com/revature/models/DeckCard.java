@@ -9,8 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "td_deck_cards")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class DeckCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

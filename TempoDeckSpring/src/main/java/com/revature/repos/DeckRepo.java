@@ -11,7 +11,9 @@ public interface DeckRepo extends JpaRepository<Deck, Integer> {
 	
      List<Deck> findAll();
 
-     Deck findById(Number deck_id);
+     Deck findById(int deckId);
+
+	List<Deck> findAllByAuthorUserId(int deckAuthor);
     
     
 

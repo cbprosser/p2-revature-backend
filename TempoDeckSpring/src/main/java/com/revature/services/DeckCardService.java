@@ -19,11 +19,11 @@ public class DeckCardService {
          return deckCardRepo.findAll();
      }
 
-	// public Deck findByDeckId(Number deckId) {
+	// public Deck findByDeckId(int deckId) {
 	// 	return null;
 	// }
 
-	// public Deck removeDeck(Number deckId) {
+	// public Deck removeDeck(int deckId) {
 	// 	return null;
 	// }
 

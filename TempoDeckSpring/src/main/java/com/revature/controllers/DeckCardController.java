@@ -26,7 +26,7 @@ public class DeckCardController {
      }
 
     // @GetMapping("/decks/{deckId}")
-    // public Deck findByDeckId(@RequestBody Number deckId) {
+    // public Deck findByDeckId(@RequestBody int deckId) {
     //     return deckCardService.findByDeckId(deckId);
     // }
 

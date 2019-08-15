@@ -11,7 +11,7 @@ public interface UserRepo extends JpaRepository<User, Integer> {
 	
      List<User> findAll();
 
-     User findById(Number user_id);
+     User findById(int user_id);
     
     
 

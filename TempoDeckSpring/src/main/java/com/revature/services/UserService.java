@@ -18,7 +18,7 @@ public class UserService {
 		return userRepo.findAll();
 	}
 
-	public User findByDeckId(Number user_id) {
+	public User findByDeckId(int user_id) {
 		return userRepo.findById(user_id);
 	}
 	
