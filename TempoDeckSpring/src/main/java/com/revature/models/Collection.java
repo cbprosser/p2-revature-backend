@@ -24,7 +24,7 @@ public class Collection {
     private boolean prototype;
 
     @Column(name = "collection_creation_date")
-    private LocalDate CreationDate;
+    private LocalDate creationDate;
 
     @Column(name = "collection_last_updated")
     private LocalDate lastUpdated;
@@ -47,7 +47,7 @@ public class Collection {
         this.author = author;
         this.collPrivate = collPrivate;
         this.prototype = prototype;
-        CreationDate = creationDate;
+        this.creationDate = creationDate;
         this.lastUpdated = lastUpdated;
         this.name = name;
         this.description = description;
@@ -87,11 +87,11 @@ public class Collection {
     }
 
     public LocalDate getCreationDate() {
-        return CreationDate;
+        return creationDate;
     }
 
     public void setCreationDate(LocalDate creationDate) {
-        CreationDate = creationDate;
+        this.creationDate = creationDate;
     }
 
     public LocalDate getLastUpdated() {
@@ -130,7 +130,7 @@ public class Collection {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((CreationDate == null) ? 0 : CreationDate.hashCode());
+        result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
         result = prime * result + author;
         result = prime * result + (collPrivate ? 1231 : 1237);
         result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -151,10 +151,10 @@ public class Collection {
         if (getClass() != obj.getClass())
             return false;
         Collection other = (Collection) obj;
-        if (CreationDate == null) {
-            if (other.CreationDate != null)
+        if (creationDate == null) {
+            if (other.creationDate != null)
                 return false;
-        } else if (!CreationDate.equals(other.CreationDate))
+        } else if (!creationDate.equals(other.creationDate))
             return false;
         if (author != other.author)
             return false;
@@ -189,7 +189,7 @@ public class Collection {
 
     @Override
     public String toString() {
-        return "CollectionId [CreationDate=" + CreationDate + ", author=" + author + ", collPrivate=" + collPrivate
+        return "CollectionId [CreationDate=" + creationDate + ", author=" + author + ", collPrivate=" + collPrivate
                 + ", description=" + description + ", featuredCard=" + featuredCard + ", id=" + id + ", lastUpdated="
                 + lastUpdated + ", name=" + name + ", prototype=" + prototype + "]";
     }

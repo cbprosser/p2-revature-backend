@@ -2,8 +2,6 @@ package com.revature.services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import com.revature.models.Deck;
 import com.revature.models.DeckCard;
 import com.revature.repos.DeckCardRepo;
@@ -17,17 +15,17 @@ public class DeckCardService {
     @Autowired
     private DeckCardRepo deckCardRepo;
     
-    public List<DeckCard> findAll() {
-        return deckCardRepo.findAll();
-    }
+     public List<DeckCard> findAll() {
+         return deckCardRepo.findAll();
+     }
 
-	public Deck findByDeckId(Number deckId) {
-		return null;
-	}
+	// public Deck findByDeckId(Number deckId) {
+	// 	return null;
+	// }
 
-	public Deck removeDeck(Number deckId) {
-		return null;
-	}
+	// public Deck removeDeck(Number deckId) {
+	// 	return null;
+	// }
 
     // Examples for reference
     // public Brand update(Brand br) {
