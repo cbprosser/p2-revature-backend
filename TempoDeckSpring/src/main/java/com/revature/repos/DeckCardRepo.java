@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface DeckCardRepo extends JpaRepository<DeckCard, Integer> {
     
-    List<DeckCard> findAll();
+     List<DeckCard> findAll();
     
 
     

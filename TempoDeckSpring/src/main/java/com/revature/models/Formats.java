@@ -21,7 +21,6 @@ public class Formats {
 
 	public Formats() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Formats(int id, String format) {
