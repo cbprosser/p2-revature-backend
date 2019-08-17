@@ -34,9 +34,9 @@ public class DeckService {
 		return deckRepo.findAllByFormat_Format(format);
 	}
 
-	// public void save(Deck deck) {
-	// 	deckRepo.save(deck);
-	// }
+	public Deck save(Deck deck) {
+		return deckRepo.saveAndFlush(deck);
+	}
 	
 
 	// public Deck removeDeck(int deckId) {

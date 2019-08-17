@@ -40,9 +40,11 @@ public class Deck {
 	@Column(name = "deck_prototype")
 	private boolean isPrototype;
 
+	@Transient
 	@Column(name = "deck_creation_date")
 	private LocalDate creationDate;
 
+	@Transient
 	@Column(name = "deck_last_updated")
 	private LocalDate lastUpdatedDate;
 
