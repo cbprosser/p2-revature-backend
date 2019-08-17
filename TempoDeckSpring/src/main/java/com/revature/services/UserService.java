@@ -2,15 +2,11 @@ package com.revature.services;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.revature.models.User;
 import com.revature.repos.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 public class UserService {
@@ -31,17 +27,17 @@ public class UserService {
 	}
 
 	public User findByUsernameAndPassword(String username, String password) {
-		
+
 		User u = userRepo.findByUsernameAndPassword(username, password);
 
 		if (u != null) {
-			// HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-			// 		.getRequest();
+			// HttpServletRequest req = ((ServletRequestAttributes)
+			// RequestContextHolder.getRequestAttributes())
+			// .getRequest();
 			// req.getSession().setAttribute("user", u);
 		}
 		return u;
 	}
-	
 
 	// public Deck removeDeck(int deckId) {
 	// return null;

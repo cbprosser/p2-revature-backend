@@ -2,11 +2,11 @@ package com.revature.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.revature.models.Deck;
 import com.revature.repos.DeckRepo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class DeckService {
@@ -37,7 +37,6 @@ public class DeckService {
 	public Deck save(Deck deck) {
 		return deckRepo.saveAndFlush(deck);
 	}
-	
 
 	// public Deck removeDeck(int deckId) {
 	// return null;

@@ -23,8 +23,8 @@ public class AuthController {
     }
 
     @GetMapping("/check-auth")
-	public User checkAuth(HttpServletRequest req) {
-		return (User) req.getSession().getAttribute("user");
-	}
+    public User checkAuth(HttpServletRequest req) {
+        return (User) req.getSession().getAttribute("user");
+    }
 
 }

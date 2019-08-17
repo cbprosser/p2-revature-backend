@@ -2,9 +2,9 @@ package com.revature.repos;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.revature.models.Deck;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DeckRepo extends JpaRepository<Deck, Integer> {
 
