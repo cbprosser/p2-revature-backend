@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +40,23 @@ public class DeckController {
      public List<Deck> findAllDecksByAuthor(@PathVariable("deck_author") int deckAuthor) {
          return deckService.findAllDecksByAuthor(deckAuthor);
      }
+     
+     @GetMapping("/featuredCard/{deck_featured_card}")
+     public List<Deck> findAllDecksByFeaturedCard(@PathVariable("deck_featured_card") String featuredCard) {
+         return deckService.findAllDecksByFeaturedCard(featuredCard);
+     }
+
+     @GetMapping("/format/{deck_format}")
+     public List<Deck> findAllDecksByFormat(@PathVariable("deck_format") String format) {
+         return deckService.findAllDecksByFormat(format);
+     }
+
+    //  @PostMapping
+    //  public void save(@RequestBody Deck deck) {
+    //     deckService.save(deck);
+    //  }
+
+
 
     // /**
     //  * 

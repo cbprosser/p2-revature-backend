@@ -25,6 +25,18 @@ public class DeckService {
 	public List<Deck> findAllDecksByAuthor(int deckAuthor) {
 		return deckRepo.findAllByAuthorUserId(deckAuthor);
 	}
+
+	public List<Deck> findAllDecksByFeaturedCard(String deckFeaturedCard) {
+		return deckRepo.findAllDecksByFeaturedCard(deckFeaturedCard);
+	}
+
+	public List<Deck> findAllDecksByFormat(String format) {
+		return deckRepo.findAllByFormat_Format(format);
+	}
+
+	// public void save(Deck deck) {
+	// 	deckRepo.save(deck);
+	// }
 	
 
 	// public Deck removeDeck(int deckId) {
