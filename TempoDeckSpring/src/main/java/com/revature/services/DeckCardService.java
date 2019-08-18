@@ -18,6 +18,10 @@ public class DeckCardService {
         return deckCardRepo.findAll();
     }
 
+	public List<DeckCard> findByDeckID(int deckID) {
+		return deckCardRepo.findByDeckId(deckID);
+	}
+
     // public Deck findByDeckId(int deckId) {
     // return null;
     // }

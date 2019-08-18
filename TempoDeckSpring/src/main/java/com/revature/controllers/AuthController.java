@@ -2,6 +2,8 @@ package com.revature.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.revature.dtos.Credentials;
+import com.revature.dtos.UserConverted;
 import com.revature.models.User;
 import com.revature.services.UserService;
 
@@ -17,9 +19,16 @@ public class AuthController {
     private UserService userService;
 
     @GetMapping("/login")
-    public User findByUsernameAndPassword(@RequestBody User user) {
-
-        return userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    public UserConverted findByUsernameAndPassword(@RequestBody Credentials cred) {
+        User dbUser = userService.findByUsernameAndPassword(cred.getUsername(), cred.getPassword());
+        return new UserConverted(
+            dbUser.getUserId(),
+            dbUser.getUsername(),
+            dbUser.getFirstName(),
+            dbUser.getLastName(),
+            dbUser.getEmail(),
+            dbUser.getRole().getName()
+            );
     }
 
     @GetMapping("/check-auth")
