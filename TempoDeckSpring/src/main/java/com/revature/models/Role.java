@@ -16,22 +16,25 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private int roleID;
+    private int id;
 
     @Column(name = "role")
     private String name;
 
-    public Role(int roleID, String name) {
-        this.roleID = roleID;
+    public Role() {
+    }
+
+    public Role(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public int getRole_Id() {
-        return roleID;
+    public int getId() {
+        return id;
     }
 
-    public void setRole_Id(int roleID) {
-        this.roleID = roleID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -46,8 +49,8 @@ public class Role {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + id;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + roleID;
         return result;
     }
 
@@ -60,22 +63,20 @@ public class Role {
         if (getClass() != obj.getClass())
             return false;
         Role other = (Role) obj;
+        if (id != other.id)
+            return false;
         if (name == null) {
             if (other.name != null)
                 return false;
         } else if (!name.equals(other.name))
-            return false;
-        if (roleID != other.roleID)
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "role [name=" + name + ", roleID=" + roleID + "]";
+        return "Role [id=" + id + ", name=" + name + "]";
     }
 
-    public Role() {
-    }
-
+    
 }

@@ -12,7 +12,7 @@ public interface DeckRepo extends JpaRepository<Deck, Integer> {
 
 	Deck findById(int deckId);
 
-	List<Deck> findAllByAuthorUserId(int deckAuthor);
+	List<Deck> findAllByAuthorId(int deckAuthor);
 
 	List<Deck> findAllDecksByFeaturedCard(String deckFeaturedCard);
 

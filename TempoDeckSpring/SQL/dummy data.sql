@@ -17,7 +17,7 @@ VALUES ('cbprosser', crypt('password', gen_salt('bf',7)), 'cbprosser@tempodeck.c
 	   ('simicrulezzz', crypt('password', gen_salt('bf',7)), 'pszegana@tempodeck.com', '', '', (SELECT role_id FROM td_role WHERE role='User'));
 
 INSERT INTO td_formats (format)
-VALUES ('Commander'), ('standard'), ('Modern'), ('Pauper'), ('Brawl'), ('Legacy'), ('Vintage');
+VALUES ('Commander'), ('Standard'), ('Modern'), ('Pauper'), ('Brawl'), ('Legacy'), ('Vintage');
 
 
 INSERT INTO td_deck (deck_author, deck_name, deck_description, deck_format)

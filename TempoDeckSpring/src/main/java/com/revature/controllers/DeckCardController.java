@@ -11,10 +11,13 @@ import com.revature.models.Deck;
 import com.revature.models.DeckCard;
 import com.revature.models.User;
 import com.revature.services.DeckCardService;
+import com.revature.services.DeckService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +27,14 @@ public class DeckCardController {
 
     @Autowired
     private DeckCardService deckCardService;
+
+    @Autowired
+    private DeckService deckService;
+
+    @GetMapping("/old")
+    public List<DeckCard> findAllOld() {
+        return deckCardService.findAll();
+    }
 
     @GetMapping
     public List<DeckConvertedWithCards> findAll() {
@@ -62,19 +73,68 @@ public class DeckCardController {
             }
             User author = deck.getAuthor();
             decks.add(new DeckConvertedWithCards(deck.getId(),
-                    new UserConverted(author.getUserId(), author.getUsername(), author.getFirstName(),
-                            author.getLastName(), author.getEmail(), author.getRole().getName()),
+                    new UserConverted(author.getId(), author.getUsername(), author.getFirstName(), author.getLastName(),
+                            author.getEmail(), author.getRole()),
                     deck.getName(), deck.getDescription(), deck.isPrivate(), deck.isPrototype(),
                     mainboard.toArray(new String[mainboard.size()]), sideboard.toArray(new String[sideboard.size()]),
-                    deck.getFormat().getFormat(), deck.getFeaturedCard()));
+                    deck.getFormat(), deck.getFeaturedCard()));
         });
 
         return decks;
     }
 
+    @GetMapping("/old/{id}")
+    public List<DeckCard> findByDeckIDOld(@PathVariable("id") int deckID) {
+        return deckCardService.findByDeckID(deckID);
+    }
+
     @GetMapping("/{id}")
     public DeckConvertedWithCards findByDeckID(@PathVariable("id") int deckID) {
         List<DeckCard> dbDeckCard = deckCardService.findByDeckID(deckID);
+        return convertToDTO(dbDeckCard);
+    }
+
+    @PostMapping("/old")
+    public List<DeckCard> createDeck(@RequestBody List<DeckCard> ReqDeck) {
+        List<DeckCard> deck = new ArrayList<>();
+        deck.addAll(ReqDeck);
+        if (deck.size() > 0) {
+            Deck newDeck = deckService.save(deck.get(0).getDeck());
+            deck.forEach(card -> {
+                card.setDeck(newDeck);
+            });
+            return deckCardService.createDeck(deck);
+        }
+        return null;
+    }
+
+    @PostMapping
+    public DeckConvertedWithCards createDeck(@RequestBody DeckConvertedWithCards newDeck) {
+        Deck newDBDeck = new Deck(newDeck.getId(),
+                new User(
+                    newDeck.getAuthor().getId(), 
+                    newDeck.getAuthor().getUsername(), 
+                    "",
+                        newDeck.getAuthor().getFirstName(), newDeck.getAuthor().getLastName(),
+                        newDeck.getAuthor().getEmail(), newDeck.getAuthor().getRole()),
+                newDeck.getDeckName(), newDeck.getDeckDescription(), newDeck.isPrivate(), newDeck.isPrototype(), null,
+                null, newDeck.getFormat(), newDeck.getFeaturedCard());
+
+        List<DeckCard> newDBDeckCard = new ArrayList<>();
+        for (String cardString : newDeck.getMainboard()) {
+            if (cardString.contains("x ")) {
+                int cardAmount = Integer.parseInt(cardString.substring(0, cardString.indexOf("x ")));
+                String card = cardString.substring(cardString.indexOf("x ") + 2);
+                newDBDeckCard.add(new DeckCard(0, newDBDeck, card, cardAmount));
+            }
+        }
+
+        List<DeckCard> createdDBDeck = createDeck(newDBDeckCard);
+
+        return convertToDTO(createdDBDeck);
+    }
+
+    private DeckConvertedWithCards convertToDTO(List<DeckCard> dbDeckCard) {
         Deck dbDeck = null;
         DeckConvertedWithCards deck = null;
         List<String> mainboard = new ArrayList<>();
@@ -94,11 +154,11 @@ public class DeckCardController {
 
         User author = dbDeck.getAuthor();
         deck = new DeckConvertedWithCards(dbDeck.getId(),
-                new UserConverted(author.getUserId(), author.getUsername(), author.getFirstName(), author.getLastName(),
-                        author.getEmail(), author.getRole().getName()),
+                new UserConverted(author.getId(), author.getUsername(), author.getFirstName(), author.getLastName(),
+                        author.getEmail(), author.getRole()),
                 dbDeck.getName(), dbDeck.getDescription(), dbDeck.isPrivate(), dbDeck.isPrototype(),
                 mainboard.toArray(new String[mainboard.size()]), sideboard.toArray(new String[sideboard.size()]),
-                dbDeck.getFormat().getFormat(), dbDeck.getFeaturedCard());
+                dbDeck.getFormat(), dbDeck.getFeaturedCard());
 
         return deck;
     }

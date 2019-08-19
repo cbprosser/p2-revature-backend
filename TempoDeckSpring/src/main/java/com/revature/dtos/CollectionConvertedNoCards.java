@@ -1,30 +1,27 @@
 package com.revature.dtos;
 
-import com.revature.models.Format;
 
-public class DeckConvertedNoCards {
+public class CollectionConvertedNoCards {
 
-    int id;
-    UserConverted author;
-    String deckName;
-    String deckDescription;
-    boolean isPrivate;
-    boolean isPrototype;
-    Format format;
-    String featuredCard;
+    private int id;
+    private UserConverted author;
+    private String collectionName;
+    private String collectionDescription;
+    private boolean isPrivate;
+    private boolean isPrototype;
+    private String featuredCard;
 
-    public DeckConvertedNoCards() {
+    public CollectionConvertedNoCards() {
     }
 
-    public DeckConvertedNoCards(int id, UserConverted author, String deckName, String deckDescription,
-            boolean isPrivate, boolean isPrototype, Format format, String featuredCard) {
+    public CollectionConvertedNoCards(int id, UserConverted author, String collectionName, String collectionDescription,
+            boolean isPrivate, boolean isPrototype, String featuredCard) {
         this.id = id;
         this.author = author;
-        this.deckName = deckName;
-        this.deckDescription = deckDescription;
+        this.collectionName = collectionName;
+        this.collectionDescription = collectionDescription;
         this.isPrivate = isPrivate;
         this.isPrototype = isPrototype;
-        this.format = format;
         this.featuredCard = featuredCard;
     }
 
@@ -44,20 +41,20 @@ public class DeckConvertedNoCards {
         this.author = author;
     }
 
-    public String getDeckName() {
-        return deckName;
+    public String getCollectionName() {
+        return collectionName;
     }
 
-    public void setDeckName(String deckName) {
-        this.deckName = deckName;
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
     }
 
-    public String getDeckDescription() {
-        return deckDescription;
+    public String getCollectionDescription() {
+        return collectionDescription;
     }
 
-    public void setDeckDescription(String deckDescription) {
-        this.deckDescription = deckDescription;
+    public void setCollectionDescription(String collectionDescription) {
+        this.collectionDescription = collectionDescription;
     }
 
     public boolean isPrivate() {
@@ -76,14 +73,6 @@ public class DeckConvertedNoCards {
         this.isPrototype = isPrototype;
     }
 
-    public Format getFormat() {
-        return format;
-    }
-
-    public void setFormat(Format format) {
-        this.format = format;
-    }
-
     public String getFeaturedCard() {
         return featuredCard;
     }
@@ -97,10 +86,9 @@ public class DeckConvertedNoCards {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((author == null) ? 0 : author.hashCode());
-        result = prime * result + ((deckDescription == null) ? 0 : deckDescription.hashCode());
-        result = prime * result + ((deckName == null) ? 0 : deckName.hashCode());
+        result = prime * result + ((collectionDescription == null) ? 0 : collectionDescription.hashCode());
+        result = prime * result + ((collectionName == null) ? 0 : collectionName.hashCode());
         result = prime * result + ((featuredCard == null) ? 0 : featuredCard.hashCode());
-        result = prime * result + ((format == null) ? 0 : format.hashCode());
         result = prime * result + id;
         result = prime * result + (isPrivate ? 1231 : 1237);
         result = prime * result + (isPrototype ? 1231 : 1237);
@@ -115,31 +103,26 @@ public class DeckConvertedNoCards {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        DeckConvertedNoCards other = (DeckConvertedNoCards) obj;
+        CollectionConvertedNoCards other = (CollectionConvertedNoCards) obj;
         if (author == null) {
             if (other.author != null)
                 return false;
         } else if (!author.equals(other.author))
             return false;
-        if (deckDescription == null) {
-            if (other.deckDescription != null)
+        if (collectionDescription == null) {
+            if (other.collectionDescription != null)
                 return false;
-        } else if (!deckDescription.equals(other.deckDescription))
+        } else if (!collectionDescription.equals(other.collectionDescription))
             return false;
-        if (deckName == null) {
-            if (other.deckName != null)
+        if (collectionName == null) {
+            if (other.collectionName != null)
                 return false;
-        } else if (!deckName.equals(other.deckName))
+        } else if (!collectionName.equals(other.collectionName))
             return false;
         if (featuredCard == null) {
             if (other.featuredCard != null)
                 return false;
         } else if (!featuredCard.equals(other.featuredCard))
-            return false;
-        if (format == null) {
-            if (other.format != null)
-                return false;
-        } else if (!format.equals(other.format))
             return false;
         if (id != other.id)
             return false;
@@ -152,8 +135,10 @@ public class DeckConvertedNoCards {
 
     @Override
     public String toString() {
-        return "DeckConvertedNoCards [author=" + author + ", deckDescription=" + deckDescription + ", deckName="
-                + deckName + ", featuredCard=" + featuredCard + ", format=" + format + ", id=" + id + ", isPrivate="
-                + isPrivate + ", isPrototype=" + isPrototype + "]";
+        return "CollectionConvertedNoCards [author=" + author + ", collectionDescription=" + collectionDescription
+                + ", collectionName=" + collectionName + ", featuredCard=" + featuredCard + ", id=" + id
+                + ", isPrivate=" + isPrivate + ", isPrototype=" + isPrototype + "]";
     }
+
+    
 }

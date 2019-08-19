@@ -2,11 +2,17 @@ package com.revature.services;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+
 import com.revature.models.User;
 import com.revature.repos.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 
 @Service
 public class UserService {
@@ -31,12 +37,26 @@ public class UserService {
 		User u = userRepo.findByUsernameAndPassword(username, password);
 
 		if (u != null) {
-			// HttpServletRequest req = ((ServletRequestAttributes)
-			// RequestContextHolder.getRequestAttributes())
-			// .getRequest();
-			// req.getSession().setAttribute("user", u);
+			HttpServletRequest req = ((ServletRequestAttributes)
+			RequestContextHolder.getRequestAttributes())
+			.getRequest();
+			req.getSession().setAttribute("user", u);
 		}
 		return u;
+	}
+
+	@Transactional
+	public User createUser(User user) {
+		userRepo.customSave(
+			user.getUsername(),
+			user.getPassword(),
+			user.getEmail(),
+			user.getFirstName(),
+			user.getLastName(),
+			user.getRole().getId()
+		);
+
+		return userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 	}
 
 	// public Deck removeDeck(int deckId) {

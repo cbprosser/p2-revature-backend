@@ -31,18 +31,18 @@ public class DeckController {
             decks.add(new DeckConvertedNoCards(
                 deck.getId(),
                 new UserConverted(
-                    author.getUserId(),
+                    author.getId(),
                     author.getUsername(),
                     author.getFirstName(),
                     author.getLastName(),
                     author.getEmail(),
-                    author.getRole().getName()
+                    author.getRole()
                 ),
                 deck.getName(),
                 deck.getDescription(),
                 deck.isPrivate(),
                 deck.isPrototype(),
-                deck.getFormat().getFormat(),
+                deck.getFormat(),
                 deck.getFeaturedCard()
             ));
         });
@@ -55,17 +55,17 @@ public class DeckController {
         User author = dbDeck.getAuthor();
         return new DeckConvertedNoCards(
             dbDeck.getId(), new UserConverted(
-                author.getUserId(), 
+                author.getId(), 
                 author.getUsername(), 
                 author.getFirstName(), 
                 author.getLastName(), 
                 author.getEmail(), 
-                author.getRole().getName()), 
+                author.getRole()), 
                 dbDeck.getName(), 
                 dbDeck.getDescription(), 
                 dbDeck.isPrivate(), 
                 dbDeck.isPrototype(), 
-                dbDeck.getFormat().getFormat(), 
+                dbDeck.getFormat(), 
                 dbDeck.getFeaturedCard());
     }
 
@@ -78,18 +78,18 @@ public class DeckController {
             decks.add(new DeckConvertedNoCards(
                 deck.getId(),
                 new UserConverted(
-                    author.getUserId(),
+                    author.getId(),
                     author.getUsername(),
                     author.getFirstName(),
                     author.getLastName(),
                     author.getEmail(),
-                    author.getRole().getName()
+                    author.getRole()
                 ),
                 deck.getName(),
                 deck.getDescription(),
                 deck.isPrivate(),
                 deck.isPrototype(),
-                deck.getFormat().getFormat(),
+                deck.getFormat(),
                 deck.getFeaturedCard()
             ));
         });
@@ -105,18 +105,18 @@ public class DeckController {
             decks.add(new DeckConvertedNoCards(
                 deck.getId(),
                 new UserConverted(
-                    author.getUserId(),
+                    author.getId(),
                     author.getUsername(),
                     author.getFirstName(),
                     author.getLastName(),
                     author.getEmail(),
-                    author.getRole().getName()
+                    author.getRole()
                 ),
                 deck.getName(),
                 deck.getDescription(),
                 deck.isPrivate(),
                 deck.isPrototype(),
-                deck.getFormat().getFormat(),
+                deck.getFormat(),
                 deck.getFeaturedCard()
             ));
         });
@@ -132,18 +132,18 @@ public class DeckController {
             decks.add(new DeckConvertedNoCards(
                 deck.getId(),
                 new UserConverted(
-                    author.getUserId(),
+                    author.getId(),
                     author.getUsername(),
                     author.getFirstName(),
                     author.getLastName(),
                     author.getEmail(),
-                    author.getRole().getName()
+                    author.getRole()
                 ),
                 deck.getName(),
                 deck.getDescription(),
                 deck.isPrivate(),
                 deck.isPrototype(),
-                deck.getFormat().getFormat(),
+                deck.getFormat(),
                 deck.getFeaturedCard()
             ));
         });

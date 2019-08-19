@@ -50,7 +50,7 @@ public class Deck {
 
 	@ManyToOne
 	@JoinColumn(name = "deck_format")
-	private Formats format;
+	private Format format;
 
 	@Column(name = "deck_featured_card")
 	private String featuredCard;
@@ -59,7 +59,7 @@ public class Deck {
 	}
 
 	public Deck(int id, User author, String name, String description, boolean isPrivate, boolean isPrototype,
-			LocalDate creationDate, LocalDate lastUpdatedDate, Formats format, String featuredCard) {
+			LocalDate creationDate, LocalDate lastUpdatedDate, Format format, String featuredCard) {
 		this.id = id;
 		this.author = author;
 		this.name = name;
@@ -136,11 +136,11 @@ public class Deck {
 		this.lastUpdatedDate = lastUpdatedDate;
 	}
 
-	public Formats getFormat() {
+	public Format getFormat() {
 		return format;
 	}
 
-	public void setFormat(Formats format) {
+	public void setFormat(Format format) {
 		this.format = format;
 	}
 
