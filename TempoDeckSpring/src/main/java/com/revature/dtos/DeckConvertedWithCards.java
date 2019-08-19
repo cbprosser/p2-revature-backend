@@ -186,6 +186,5 @@ public class DeckConvertedWithCards {
                 + isPrivate + ", isPrototype=" + isPrototype + ", mainboard=" + Arrays.toString(mainboard)
                 + ", sideboard=" + Arrays.toString(sideboard) + "]";
     }
-
     
 }
