@@ -14,4 +14,5 @@ public interface DeckCardRepo extends JpaRepository<DeckCard, Integer> {
      List<DeckCard> findAll(Sort sort);
 
 	List<DeckCard> findByDeckId(int Id);
+	
 }
