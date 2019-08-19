@@ -22,18 +22,28 @@ public class AuthController {
     public UserConverted findByUsernameAndPassword(@RequestBody Credentials cred) {
         User dbUser = userService.findByUsernameAndPassword(cred.getUsername(), cred.getPassword());
         return new UserConverted(
-            dbUser.getUserId(),
+            dbUser.getId(),
             dbUser.getUsername(),
             dbUser.getFirstName(),
             dbUser.getLastName(),
             dbUser.getEmail(),
-            dbUser.getRole().getName()
+            dbUser.getRole()
             );
     }
 
     @GetMapping("/check-auth")
-    public User checkAuth(HttpServletRequest req) {
-        return (User) req.getSession().getAttribute("user");
+    public UserConverted checkAuth(HttpServletRequest req) {
+        User sessionUser = (User) req.getSession().getAttribute("user");
+        if (sessionUser != null) {
+            return new UserConverted(
+                sessionUser.getId(), 
+                sessionUser.getUsername(), 
+                sessionUser.getFirstName(), 
+                sessionUser.getLastName(), 
+                sessionUser.getEmail(), 
+                sessionUser.getRole());
+        }
+        return null;
     }
 
 }

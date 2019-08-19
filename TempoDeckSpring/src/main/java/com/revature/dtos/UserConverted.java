@@ -1,19 +1,21 @@
 package com.revature.dtos;
 
+import com.revature.models.Role;
+
 public class UserConverted {
 
-    int userId;
+    int id;
     String username;
     String firstName;
     String lastName;
     String email;
-    String role;
+    Role role;
 
     public UserConverted() {
     }
 
-    public UserConverted(int id, String username, String firstName, String lastName, String email, String role) {
-        this.userId = id;
+    public UserConverted(int id, String username, String firstName, String lastName, String email, Role role) {
+        this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,7 +23,13 @@ public class UserConverted {
         this.role = role;
     }
 
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -55,21 +63,12 @@ public class UserConverted {
         this.email = email;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
-    }
-
-    
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     @Override
@@ -78,9 +77,9 @@ public class UserConverted {
         int result = 1;
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+        result = prime * result + id;
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((role == null) ? 0 : role.hashCode());
-        result = prime * result + userId;
         result = prime * result + ((username == null) ? 0 : username.hashCode());
         return result;
     }
@@ -104,6 +103,8 @@ public class UserConverted {
                 return false;
         } else if (!firstName.equals(other.firstName))
             return false;
+        if (id != other.id)
+            return false;
         if (lastName == null) {
             if (other.lastName != null)
                 return false;
@@ -113,8 +114,6 @@ public class UserConverted {
             if (other.role != null)
                 return false;
         } else if (!role.equals(other.role))
-            return false;
-        if (userId != other.userId)
             return false;
         if (username == null) {
             if (other.username != null)
@@ -126,8 +125,7 @@ public class UserConverted {
 
     @Override
     public String toString() {
-        return "UserConverted [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", role="
-                + role + ", userId=" + userId + ", username=" + username + "]";
+        return "UserConverted [email=" + email + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName
+                + ", role=" + role + ", username=" + username + "]";
     }
-    
 }

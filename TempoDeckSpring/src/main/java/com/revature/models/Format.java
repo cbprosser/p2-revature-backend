@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="td_formats")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Formats {
+public class Format {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +22,11 @@ public class Formats {
 	@Column(name = "format")
 	private String format;
 
-	public Formats() {
+	public Format() {
 		super();
 	}
 
-	public Formats(int id, String format) {
+	public Format(int id, String format) {
 		super();
 		this.id = id;
 		this.format = format;
@@ -65,7 +65,7 @@ public class Formats {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Formats other = (Formats) obj;
+		Format other = (Format) obj;
 		if (format == null) {
 			if (other.format != null)
 				return false;

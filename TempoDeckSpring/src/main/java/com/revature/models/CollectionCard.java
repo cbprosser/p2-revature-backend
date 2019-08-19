@@ -26,7 +26,7 @@ public class CollectionCard {
     private Collection collection;
 
     @Column(name = "collection_card")
-    private String collectionCard;
+    private String card;
 
     @Column(name = "collection_card_amount")
     private int amount;
@@ -34,10 +34,10 @@ public class CollectionCard {
     public CollectionCard() {
     }
 
-    public CollectionCard(int id, Collection collection, String collectionCard, int amount) {
+    public CollectionCard(int id, Collection collection, String card, int amount) {
         this.id = id;
         this.collection = collection;
-        this.collectionCard = collectionCard;
+        this.card = card;
         this.amount = amount;
     }
 
@@ -57,12 +57,12 @@ public class CollectionCard {
         this.collection = collection;
     }
 
-    public String getCollectionCard() {
-        return collectionCard;
+    public String getCard() {
+        return card;
     }
 
-    public void setCollectionCard(String collectionCard) {
-        this.collectionCard = collectionCard;
+    public void setCard(String card) {
+        this.card = card;
     }
 
     public int getAmount() {
@@ -78,8 +78,8 @@ public class CollectionCard {
         final int prime = 31;
         int result = 1;
         result = prime * result + amount;
+        result = prime * result + ((card == null) ? 0 : card.hashCode());
         result = prime * result + ((collection == null) ? 0 : collection.hashCode());
-        result = prime * result + ((collectionCard == null) ? 0 : collectionCard.hashCode());
         result = prime * result + id;
         return result;
     }
@@ -95,15 +95,15 @@ public class CollectionCard {
         CollectionCard other = (CollectionCard) obj;
         if (amount != other.amount)
             return false;
+        if (card == null) {
+            if (other.card != null)
+                return false;
+        } else if (!card.equals(other.card))
+            return false;
         if (collection == null) {
             if (other.collection != null)
                 return false;
         } else if (!collection.equals(other.collection))
-            return false;
-        if (collectionCard == null) {
-            if (other.collectionCard != null)
-                return false;
-        } else if (!collectionCard.equals(other.collectionCard))
             return false;
         if (id != other.id)
             return false;
@@ -112,8 +112,8 @@ public class CollectionCard {
 
     @Override
     public String toString() {
-        return "CollectionCard [amount=" + amount + ", collection=" + collection + ", collectionCard=" + collectionCard
-                + ", id=" + id + "]";
+        return "CollectionCard [amount=" + amount + ", card=" + card + ", collection=" + collection + ", id=" + id
+                + "]";
     }
 
 }

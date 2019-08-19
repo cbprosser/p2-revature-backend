@@ -18,7 +18,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private int userId;
+	private int id;
 
 	@Column(name = "username")
 	private String username;
@@ -39,9 +39,11 @@ public class User {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
-	public User(int userId, String username, String password, String firstName, String lastName, String email,
-			Role role) {
-		this.userId = userId;
+	public User() {
+	}
+
+	public User(int id, String username, String password, String firstName, String lastName, String email, Role role) {
+		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
@@ -50,12 +52,12 @@ public class User {
 		this.role = role;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getId() {
+		return id;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -112,10 +114,10 @@ public class User {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -139,6 +141,8 @@ public class User {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
+		if (id != other.id)
+			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
@@ -154,8 +158,6 @@ public class User {
 				return false;
 		} else if (!role.equals(other.role))
 			return false;
-		if (userId != other.userId)
-			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -166,11 +168,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
-				+ ", role=" + role + ", userId=" + userId + ", username=" + username + "]";
-	}
-
-	public User() {
+		return "User [email=" + email + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName
+				+ ", password=" + password + ", role=" + role + ", username=" + username + "]";
 	}
 
 }

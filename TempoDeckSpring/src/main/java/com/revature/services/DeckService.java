@@ -23,7 +23,7 @@ public class DeckService {
 	}
 
 	public List<Deck> findAllDecksByAuthor(int deckAuthor) {
-		return deckRepo.findAllByAuthorUserId(deckAuthor);
+		return deckRepo.findAllByAuthorId(deckAuthor);
 	}
 
 	public List<Deck> findAllDecksByFeaturedCard(String deckFeaturedCard) {

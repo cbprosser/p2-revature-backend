@@ -2,6 +2,8 @@ package com.revature.dtos;
 
 import java.util.Arrays;
 
+import com.revature.models.Format;
+
 public class DeckConvertedWithCards {
 
     int id;
@@ -12,14 +14,14 @@ public class DeckConvertedWithCards {
     boolean isPrototype;
     String[] mainboard;
     String[] sideboard;
-    String format;
+    Format format;
     String featuredCard;
 
     public DeckConvertedWithCards() {
     }
 
     public DeckConvertedWithCards(int id, UserConverted author, String deckName, String deckDescription,
-            boolean isPrivate, boolean isPrototype, String[] mainboard, String[] sideboard, String format,
+            boolean isPrivate, boolean isPrototype, String[] mainboard, String[] sideboard, Format format,
             String featuredCard) {
         this.id = id;
         this.author = author;
@@ -97,11 +99,11 @@ public class DeckConvertedWithCards {
         this.sideboard = sideboard;
     }
 
-    public String getFormat() {
+    public Format getFormat() {
         return format;
     }
 
-    public void setFormat(String format) {
+    public void setFormat(Format format) {
         this.format = format;
     }
 
@@ -184,5 +186,6 @@ public class DeckConvertedWithCards {
                 + isPrivate + ", isPrototype=" + isPrototype + ", mainboard=" + Arrays.toString(mainboard)
                 + ", sideboard=" + Arrays.toString(sideboard) + "]";
     }
+
     
 }
