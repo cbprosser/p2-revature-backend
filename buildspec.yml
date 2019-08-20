@@ -4,11 +4,11 @@ phases:
     runtime-versions:
       java: openjdk8
     commands:
-      - cd p2-backend/TempoDeckSpring
+      - cd TempoDeckSpring
   build:
     commands:
       - mvn clean package
 artifacts:
   files:
     - '**/*'
-  base-directory: 'p2-backend/TempoDeckSpring/target'
+  base-directory: 'TempoDeckSpring/target'
