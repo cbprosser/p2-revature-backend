@@ -2,6 +2,9 @@ package com.revature.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import com.revature.dtos.DeckConvertedNoCards;
 import com.revature.models.Deck;
 import com.revature.repos.DeckRepo;
 
@@ -36,6 +39,31 @@ public class DeckService {
 
 	public Deck save(Deck deck) {
 		return deckRepo.saveAndFlush(deck);
+	}
+
+	@Transactional
+	public Deck updateDeck(Deck deck) {
+		Deck deckToUpdate = deckRepo.getOne(deck.getId());
+		deckToUpdate.setAuthor(deck.getAuthor());
+		deckToUpdate.setDescription(deck.getDescription());
+		deckToUpdate.setFeaturedCard(deck.getFeaturedCard());
+		deckToUpdate.setFormat(deck.getFormat());
+		deckToUpdate.setName(deck.getName());
+		deckToUpdate.setPrivate(deck.isPrivate());
+		deckToUpdate.setPrototype(deck.isPrototype());
+		return deckToUpdate;
+	}
+
+	@Transactional
+	public Deck updateDeck(DeckConvertedNoCards deck) {
+		Deck deckToUpdate = deckRepo.getOne(deck.getId());
+		deckToUpdate.setDescription(deck.getDeckDescription());
+		deckToUpdate.setFeaturedCard(deck.getFeaturedCard());
+		deckToUpdate.setFormat(deck.getFormat());
+		deckToUpdate.setName(deck.getDeckName());
+		deckToUpdate.setPrivate(deck.isPrivate());
+		deckToUpdate.setPrototype(deck.isPrototype());
+		return deckToUpdate;
 	}
 
 	// public Deck removeDeck(int deckId) {

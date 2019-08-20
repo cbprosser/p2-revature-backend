@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,43 +48,45 @@ public class CollectionCardController {
             if (!dbCollections.contains(card.getCollection())) {
                 dbCollections.add(card.getCollection());
             }
-            String cardString = card.getAmount() + "x " + card.getCard();
-            mainboardCards.add(new CardCollectionId(card.getCollection().getId(), cardString));
+            if (card.getAmount() != 0) {
+                String cardString = card.getAmount() + "x " + card.getCard();
+                mainboardCards.add(new CardCollectionId(card.getCollection().getId(), cardString));
+            }
         });
 
-        dbCollections.forEach(deck -> {
+        dbCollections.forEach(collection -> {
             List<String> mainboard = new ArrayList<>();
             List<String> sideboard = new ArrayList<>();
             for (int i = 0; i < mainboardCards.size(); i++) {
-                if (mainboardCards.get(i).getCollectionId() == deck.getId()) {
+                if (mainboardCards.get(i).getCollectionId() == collection.getId()) {
                     mainboard.add(mainboardCards.remove(i).getCardString());
                     i--;
                 }
             }
             for (int i = 0; i < sideboardCards.size(); i++) {
-                if (sideboardCards.get(i).getCollectionId() == deck.getId()) {
+                if (sideboardCards.get(i).getCollectionId() == collection.getId()) {
                     sideboard.add(sideboardCards.remove(i).getCardString());
                     i--;
                 }
             }
-            User author = deck.getAuthor();
-            collections.add(new CollectionConvertedWithCards(deck.getId(),
+            User author = collection.getAuthor();
+            collections.add(new CollectionConvertedWithCards(collection.getId(),
                     new UserConverted(author.getId(), author.getUsername(), author.getFirstName(), author.getLastName(),
                             author.getEmail(), author.getRole()),
-                    deck.getName(), deck.getDescription(), deck.isPrivate(), deck.isPrototype(),
-                    mainboard.toArray(new String[mainboard.size()]), deck.getFeaturedCard()));
+                    collection.getName(), collection.getDescription(), collection.isPrivate(), collection.isPrototype(),
+                    mainboard.toArray(new String[mainboard.size()]), collection.getFeaturedCard()));
         });
 
         return collections;
     }
 
     @GetMapping("/old/{id}")
-    public List<CollectionCard> findByDeckIDOld(@PathVariable("id") int collectionID) {
+    public List<CollectionCard> findByCollectionIDOld(@PathVariable("id") int collectionID) {
         return collectionCardService.findByCollectionID(collectionID);
     }
 
     @GetMapping("/{id}")
-    public CollectionConvertedWithCards findByDeckID(@PathVariable("id") int collectionID) {
+    public CollectionConvertedWithCards findByCollectionID(@PathVariable("id") int collectionID) {
         List<CollectionCard> dbCards = collectionCardService.findByCollectionID(collectionID);
         return convertToDTO(dbCards);
     }
@@ -96,33 +99,26 @@ public class CollectionCardController {
             if (dbCollection == null) {
                 dbCollection = card.getCollection();
             }
-             String cardString = card.getAmount() + "x " + card.getCard();
-                cards.add(cardString);
-            
+            if (card.getAmount() == 0) {
+                continue;
+            }
+            String cardString = card.getAmount() + "x " + card.getCard();
+            cards.add(cardString);
+
         }
 
         User author = dbCollection.getAuthor();
-        collection = new CollectionConvertedWithCards(
-            dbCollection.getId(),
-                new UserConverted(
-                    author.getId(), 
-                    author.getUsername(), 
-                    author.getFirstName(), 
-                    author.getLastName(),
-                    author.getEmail(), 
-                    author.getRole()),
-                dbCollection.getName(), 
-                dbCollection.getDescription(), 
-                dbCollection.isPrivate(), 
-                dbCollection.isPrototype(),
-                cards.toArray(new String[cards.size()]),
-                dbCollection.getFeaturedCard());
+        collection = new CollectionConvertedWithCards(dbCollection.getId(),
+                new UserConverted(author.getId(), author.getUsername(), author.getFirstName(), author.getLastName(),
+                        author.getEmail(), author.getRole()),
+                dbCollection.getName(), dbCollection.getDescription(), dbCollection.isPrivate(),
+                dbCollection.isPrototype(), cards.toArray(new String[cards.size()]), dbCollection.getFeaturedCard());
 
         return collection;
     }
 
     @PostMapping("/old")
-    public List<CollectionCard> createDeck(@RequestBody List<CollectionCard> collection) {
+    public List<CollectionCard> createCollection(@RequestBody List<CollectionCard> collection) {
         if (collection.size() > 0) {
             Collection newCollection = collectionService.save(collection.get(0).getCollection());
             collection.forEach(card -> {
@@ -134,24 +130,13 @@ public class CollectionCardController {
     }
 
     @PostMapping
-    public CollectionConvertedWithCards createDeck(@RequestBody CollectionConvertedWithCards newCollection) {
-        Collection newDBCollection = new Collection(
-            newCollection.getId(), 
-            new User(
-                newCollection.getAuthor().getId(), 
-                newCollection.getAuthor().getUsername(), 
-                "", 
-                newCollection.getAuthor().getFirstName(), 
-                newCollection.getAuthor().getLastName(), 
-                newCollection.getAuthor().getEmail(), 
-                newCollection.getAuthor().getRole()), 
-            newCollection.isPrivate(), 
-            newCollection.isPrototype(), 
-            null, 
-            null, 
-            newCollection.getCollectionName(), 
-            newCollection.getCollectionDescription(), 
-            newCollection.getFeaturedCard());
+    public CollectionConvertedWithCards createCollection(@RequestBody CollectionConvertedWithCards newCollection) {
+        Collection newDBCollection = new Collection(newCollection.getId(),
+                new User(newCollection.getAuthor().getId(), newCollection.getAuthor().getUsername(), "",
+                        newCollection.getAuthor().getFirstName(), newCollection.getAuthor().getLastName(),
+                        newCollection.getAuthor().getEmail(), newCollection.getAuthor().getRole()),
+                newCollection.isPrivate(), newCollection.isPrototype(), null, null, newCollection.getCollectionName(),
+                newCollection.getCollectionDescription(), newCollection.getFeaturedCard());
 
         List<CollectionCard> newDBCollectionCard = new ArrayList<>();
         for (String cardString : newCollection.getCards()) {
@@ -162,10 +147,47 @@ public class CollectionCardController {
             }
         }
 
-        List<CollectionCard> createdDBDeck = createDeck(newDBCollectionCard);
+        List<CollectionCard> createdDBCollection = createCollection(newDBCollectionCard);
 
-        return convertToDTO(createdDBDeck);
+        return convertToDTO(createdDBCollection);
     }
 
+    @PutMapping("/old")
+    public List<CollectionCard> updateCollection(@RequestBody List<CollectionCard> collection) {
+        if (collection.size() > 0) {
+            Collection newCollection = collectionService.save(collection.get(0).getCollection());
+            collection.forEach(card -> {
+                card.setCollection(newCollection);
+            });
+            return collectionCardService.updateCollection(collection, collection.get(0).getCollection().getId());
+        }
+        return null;
+    }
 
+    @PutMapping
+    public CollectionConvertedWithCards updateCollection(@RequestBody CollectionConvertedWithCards reqCollection) {
+        Collection dbCollectionToUpdate = new Collection(reqCollection.getId(),
+                new User(reqCollection.getAuthor().getId(), reqCollection.getAuthor().getUsername(), null,
+                        reqCollection.getAuthor().getFirstName(), reqCollection.getAuthor().getLastName(),
+                        reqCollection.getAuthor().getEmail(), reqCollection.getAuthor().getRole()),
+                reqCollection.isPrivate(), reqCollection.isPrototype(), null, null, reqCollection.getCollectionName(),
+                reqCollection.getCollectionDescription(), reqCollection.getFeaturedCard());
+
+        List<CollectionCard> dbCollectionCardUpdated = new ArrayList<>();
+        for (String cardString : reqCollection.getCards()) {
+            if (cardString.contains("x ")) {
+                int cardAmount = Integer.parseInt(cardString.substring(0, cardString.indexOf("x ")));
+                String card = cardString.substring(cardString.indexOf("x ") + 2);
+                dbCollectionCardUpdated.add(new CollectionCard(0, dbCollectionToUpdate, card, cardAmount));
+            }
+        }
+
+        System.out.println(dbCollectionCardUpdated);
+
+        List<CollectionCard> updatedDBCollection = updateCollection(dbCollectionCardUpdated);
+
+        System.out.println(updatedDBCollection);
+
+        return convertToDTO(updatedDBCollection);
+    }
 }
