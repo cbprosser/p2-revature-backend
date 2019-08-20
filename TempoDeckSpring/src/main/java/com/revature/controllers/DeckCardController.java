@@ -78,7 +78,7 @@ public class DeckCardController {
             decks.add(new DeckConvertedWithCards(deck.getId(),
                     new UserConverted(author.getId(), author.getUsername(), author.getFirstName(), author.getLastName(),
                             author.getEmail(), author.getRole()),
-                    deck.getName(), deck.getDescription(), deck.isPrivate(), deck.isPrototype(),
+                    deck.getName(), deck.getDescription(), deck.getIsPrivate(), deck.getIsPrototype(),
                     mainboard.toArray(new String[mainboard.size()]), sideboard.toArray(new String[sideboard.size()]),
                     deck.getFormat(), deck.getFeaturedCard()));
         });
@@ -117,7 +117,7 @@ public class DeckCardController {
                 new User(newDeck.getAuthor().getId(), newDeck.getAuthor().getUsername(), "",
                         newDeck.getAuthor().getFirstName(), newDeck.getAuthor().getLastName(),
                         newDeck.getAuthor().getEmail(), newDeck.getAuthor().getRole()),
-                newDeck.getDeckName(), newDeck.getDeckDescription(), newDeck.isPrivate(), newDeck.isPrototype(), null,
+                newDeck.getDeckName(), newDeck.getDeckDescription(), newDeck.getIsPrivate(), newDeck.getIsPrototype(), null,
                 null, newDeck.getFormat(), newDeck.getFeaturedCard());
 
         List<DeckCard> newDBDeckCard = new ArrayList<>();
@@ -170,8 +170,8 @@ public class DeckCardController {
                 reqDeck.getAuthor().getRole()),
             reqDeck.getDeckName(), 
             reqDeck.getDeckDescription(), 
-            reqDeck.isPrivate(), 
-            reqDeck.isPrototype(), 
+            reqDeck.getIsPrivate(), 
+            reqDeck.getIsPrototype(), 
             null,    
             null, 
             reqDeck.getFormat(), 
@@ -230,13 +230,13 @@ public class DeckCardController {
             deck = new DeckConvertedWithCards(dbDeck.getId(),
                 new UserConverted(author.getId(), author.getUsername(), author.getFirstName(), author.getLastName(),
                         author.getEmail(), author.getRole()),
-                dbDeck.getName(), dbDeck.getDescription(), dbDeck.isPrivate(), dbDeck.isPrototype(),
+                dbDeck.getName(), dbDeck.getDescription(), dbDeck.getIsPrivate(), dbDeck.getIsPrototype(),
                 mainboard.toArray(new String[mainboard.size()]), sideboard.toArray(new String[sideboard.size()]),
                 dbDeck.getFormat(), dbDeck.getFeaturedCard());
         } else {
             deck = new DeckConvertedWithCards(dbDeck.getId(),
                 null,
-                dbDeck.getName(), dbDeck.getDescription(), dbDeck.isPrivate(), dbDeck.isPrototype(),
+                dbDeck.getName(), dbDeck.getDescription(), dbDeck.getIsPrivate(), dbDeck.getIsPrototype(),
                 mainboard.toArray(new String[mainboard.size()]), sideboard.toArray(new String[sideboard.size()]),
                 dbDeck.getFormat(), dbDeck.getFeaturedCard());
         }

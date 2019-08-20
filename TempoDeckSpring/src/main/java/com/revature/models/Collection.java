@@ -82,7 +82,7 @@ public class Collection {
         this.author = author;
     }
 
-    public boolean isPrivate() {
+    public boolean getIsPrivate() {
         return isPrivate;
     }
 
@@ -90,7 +90,7 @@ public class Collection {
         this.isPrivate = isPrivate;
     }
 
-    public boolean isPrototype() {
+    public boolean getIsPrototype() {
         return isPrototype;
     }
 

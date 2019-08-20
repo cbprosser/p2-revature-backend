@@ -49,8 +49,8 @@ public class DeckService {
 		deckToUpdate.setFeaturedCard(deck.getFeaturedCard());
 		deckToUpdate.setFormat(deck.getFormat());
 		deckToUpdate.setName(deck.getName());
-		deckToUpdate.setPrivate(deck.isPrivate());
-		deckToUpdate.setPrototype(deck.isPrototype());
+		deckToUpdate.setPrivate(deck.getIsPrivate());
+		deckToUpdate.setPrototype(deck.getIsPrototype());
 		return deckToUpdate;
 	}
 
@@ -61,8 +61,8 @@ public class DeckService {
 		deckToUpdate.setFeaturedCard(deck.getFeaturedCard());
 		deckToUpdate.setFormat(deck.getFormat());
 		deckToUpdate.setName(deck.getDeckName());
-		deckToUpdate.setPrivate(deck.isPrivate());
-		deckToUpdate.setPrototype(deck.isPrototype());
+		deckToUpdate.setPrivate(deck.getIsPrivate());
+		deckToUpdate.setPrototype(deck.getIsPrototype());
 		return deckToUpdate;
 	}
 

@@ -47,8 +47,8 @@ public class DeckController {
                 ),
                 deck.getName(),
                 deck.getDescription(),
-                deck.isPrivate(),
-                deck.isPrototype(),
+                deck.getIsPrivate(),
+                deck.getIsPrototype(),
                 deck.getFormat(),
                 deck.getFeaturedCard()
             ));
@@ -70,8 +70,8 @@ public class DeckController {
                 author.getRole()), 
                 dbDeck.getName(), 
                 dbDeck.getDescription(), 
-                dbDeck.isPrivate(), 
-                dbDeck.isPrototype(), 
+                dbDeck.getIsPrivate(), 
+                dbDeck.getIsPrototype(), 
                 dbDeck.getFormat(), 
                 dbDeck.getFeaturedCard());
     }
@@ -94,8 +94,8 @@ public class DeckController {
                 ),
                 deck.getName(),
                 deck.getDescription(),
-                deck.isPrivate(),
-                deck.isPrototype(),
+                deck.getIsPrivate(),
+                deck.getIsPrototype(),
                 deck.getFormat(),
                 deck.getFeaturedCard()
             ));
@@ -121,8 +121,8 @@ public class DeckController {
                 ),
                 deck.getName(),
                 deck.getDescription(),
-                deck.isPrivate(),
-                deck.isPrototype(),
+                deck.getIsPrivate(),
+                deck.getIsPrototype(),
                 deck.getFormat(),
                 deck.getFeaturedCard()
             ));
@@ -148,8 +148,8 @@ public class DeckController {
                 ),
                 deck.getName(),
                 deck.getDescription(),
-                deck.isPrivate(),
-                deck.isPrototype(),
+                deck.getIsPrivate(),
+                deck.getIsPrototype(),
                 deck.getFormat(),
                 deck.getFeaturedCard()
             ));
@@ -171,8 +171,8 @@ public class DeckController {
                 author.getRole()), 
                 dbDeck.getName(), 
                 dbDeck.getDescription(), 
-                dbDeck.isPrivate(), 
-                dbDeck.isPrototype(), 
+                dbDeck.getIsPrivate(), 
+                dbDeck.getIsPrototype(), 
                 dbDeck.getFormat(), 
                 dbDeck.getFeaturedCard());
     }

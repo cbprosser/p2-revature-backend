@@ -57,7 +57,7 @@ public class CollectionConvertedNoCards {
         this.collectionDescription = collectionDescription;
     }
 
-    public boolean isPrivate() {
+    public boolean getIsPrivate() {
         return isPrivate;
     }
 
@@ -65,7 +65,7 @@ public class CollectionConvertedNoCards {
         this.isPrivate = isPrivate;
     }
 
-    public boolean isPrototype() {
+    public boolean getIsPrototype() {
         return isPrototype;
     }
 

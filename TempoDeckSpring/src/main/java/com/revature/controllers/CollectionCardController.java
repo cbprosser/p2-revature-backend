@@ -73,7 +73,7 @@ public class CollectionCardController {
             collections.add(new CollectionConvertedWithCards(collection.getId(),
                     new UserConverted(author.getId(), author.getUsername(), author.getFirstName(), author.getLastName(),
                             author.getEmail(), author.getRole()),
-                    collection.getName(), collection.getDescription(), collection.isPrivate(), collection.isPrototype(),
+                    collection.getName(), collection.getDescription(), collection.getIsPrivate(), collection.getIsPrototype(),
                     mainboard.toArray(new String[mainboard.size()]), collection.getFeaturedCard()));
         });
 
@@ -111,8 +111,8 @@ public class CollectionCardController {
         collection = new CollectionConvertedWithCards(dbCollection.getId(),
                 new UserConverted(author.getId(), author.getUsername(), author.getFirstName(), author.getLastName(),
                         author.getEmail(), author.getRole()),
-                dbCollection.getName(), dbCollection.getDescription(), dbCollection.isPrivate(),
-                dbCollection.isPrototype(), cards.toArray(new String[cards.size()]), dbCollection.getFeaturedCard());
+                dbCollection.getName(), dbCollection.getDescription(), dbCollection.getIsPrivate(),
+                dbCollection.getIsPrototype(), cards.toArray(new String[cards.size()]), dbCollection.getFeaturedCard());
 
         return collection;
     }
@@ -135,7 +135,7 @@ public class CollectionCardController {
                 new User(newCollection.getAuthor().getId(), newCollection.getAuthor().getUsername(), "",
                         newCollection.getAuthor().getFirstName(), newCollection.getAuthor().getLastName(),
                         newCollection.getAuthor().getEmail(), newCollection.getAuthor().getRole()),
-                newCollection.isPrivate(), newCollection.isPrototype(), null, null, newCollection.getCollectionName(),
+                newCollection.getIsPrivate(), newCollection.getIsPrototype(), null, null, newCollection.getCollectionName(),
                 newCollection.getCollectionDescription(), newCollection.getFeaturedCard());
 
         List<CollectionCard> newDBCollectionCard = new ArrayList<>();
@@ -170,7 +170,7 @@ public class CollectionCardController {
                 new User(reqCollection.getAuthor().getId(), reqCollection.getAuthor().getUsername(), null,
                         reqCollection.getAuthor().getFirstName(), reqCollection.getAuthor().getLastName(),
                         reqCollection.getAuthor().getEmail(), reqCollection.getAuthor().getRole()),
-                reqCollection.isPrivate(), reqCollection.isPrototype(), null, null, reqCollection.getCollectionName(),
+                reqCollection.getIsPrivate(), reqCollection.getIsPrototype(), null, null, reqCollection.getCollectionName(),
                 reqCollection.getCollectionDescription(), reqCollection.getFeaturedCard());
 
         List<CollectionCard> dbCollectionCardUpdated = new ArrayList<>();

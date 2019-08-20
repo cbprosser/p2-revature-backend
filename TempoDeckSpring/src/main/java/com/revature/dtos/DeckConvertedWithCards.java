@@ -67,7 +67,7 @@ public class DeckConvertedWithCards {
         this.deckDescription = deckDescription;
     }
 
-    public boolean isPrivate() {
+    public boolean getIsPrivate() {
         return isPrivate;
     }
 
@@ -75,7 +75,7 @@ public class DeckConvertedWithCards {
         this.isPrivate = isPrivate;
     }
 
-    public boolean isPrototype() {
+    public boolean getIsPrototype() {
         return isPrototype;
     }
 

@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "td_deck")
@@ -35,6 +36,7 @@ public class Deck {
 	private String description;
 
 	@Column(name = "deck_private")
+	@JsonProperty("isPrivate")
 	private boolean isPrivate;
 
 	@Column(name = "deck_prototype")
@@ -104,7 +106,7 @@ public class Deck {
 		this.description = description;
 	}
 
-	public boolean isPrivate() {
+	public boolean getIsPrivate() {
 		return isPrivate;
 	}
 
@@ -112,7 +114,7 @@ public class Deck {
 		this.isPrivate = isPrivate;
 	}
 
-	public boolean isPrototype() {
+	public boolean getIsPrototype() {
 		return isPrototype;
 	}
 
