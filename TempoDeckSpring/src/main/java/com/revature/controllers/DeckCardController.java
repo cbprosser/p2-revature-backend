@@ -48,12 +48,14 @@ public class DeckCardController {
             if (!dbDecks.contains(card.getDeck())) {
                 dbDecks.add(card.getDeck());
             }
-            if (card.getCard().startsWith("SB:")) {
-                String cardString = card.getCardAmount() + "x " + card.getCard().substring(3);
-                sideboardCards.add(new CardDeckId(card.getDeck().getId(), cardString));
-            } else {
-                String cardString = card.getCardAmount() + "x " + card.getCard();
-                mainboardCards.add(new CardDeckId(card.getDeck().getId(), cardString));
+            if(card.getCardAmount() != 0) {
+                if (card.getCard().startsWith("SB:")) {
+                    String cardString = card.getCardAmount() + "x " + card.getCard().substring(3);
+                    sideboardCards.add(new CardDeckId(card.getDeck().getId(), cardString));
+                } else {
+                    String cardString = card.getCardAmount() + "x " + card.getCard();
+                    mainboardCards.add(new CardDeckId(card.getDeck().getId(), cardString));
+                }
             }
         });
 
