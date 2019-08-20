@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
+import com.revature.dtos.UserConverted;
 import com.revature.models.User;
 import com.revature.repos.UserRepo;
 
@@ -59,7 +60,12 @@ public class UserService {
 		return userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 	}
 
-	// public Deck removeDeck(int deckId) {
-	// return null;
-	// }
+	@Transactional
+	public User updateUser(UserConverted user) {
+		User toSave = userRepo.findById(user.getId());
+		toSave.setEmail(user.getEmail());
+		toSave.setFirstName(user.getFirstName());
+		toSave.setLastName(user.getLastName());
+		return toSave;
+	}
 }

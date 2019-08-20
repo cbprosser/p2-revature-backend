@@ -12,6 +12,8 @@ import com.revature.services.DeckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,11 @@ public class DeckController {
 
     @Autowired
     private DeckService deckService;
+
+    @GetMapping("/old")
+    public List<Deck> findAllOld() {
+        return deckService.findAll();
+    }
 
     @GetMapping
     public List<DeckConvertedNoCards> findAll() {
@@ -150,21 +157,28 @@ public class DeckController {
         return decks;
     }
 
-    // @PostMapping
-    // @ResponseBody
-    // public Deck save(@RequestBody Deck deck) {
-    //     return deckService.save(deck);
-    // }
+    @PutMapping
+    public DeckConvertedNoCards updateDeck(@RequestBody DeckConvertedNoCards deck) {
+        Deck dbDeck = deckService.updateDeck(deck);
+        User author = dbDeck.getAuthor();
+        return new DeckConvertedNoCards(
+            dbDeck.getId(), new UserConverted(
+                author.getId(), 
+                author.getUsername(), 
+                author.getFirstName(), 
+                author.getLastName(), 
+                author.getEmail(), 
+                author.getRole()), 
+                dbDeck.getName(), 
+                dbDeck.getDescription(), 
+                dbDeck.isPrivate(), 
+                dbDeck.isPrototype(), 
+                dbDeck.getFormat(), 
+                dbDeck.getFeaturedCard());
+    }
 
-    // /**
-    // *
-    // * @param deckId
-    // */
-    // @DeleteMapping("/{deckId}")
-    // public ResponseEntity<Deck> delete(@PathVariable int deckId){
-    // Deck updateDeck = deckService.removeDeck(deckId);
-    // ResponseEntity<Deck> resp = new ResponseEntity<Deck>(updateDeck,
-    // HttpStatus.ACCEPTED);
-    // return resp;
-    // }
+    @PutMapping("/old")
+    public Deck updateDeckOld(@RequestBody Deck deck) {
+        return deckService.updateDeck(deck);
+    }
 }
