@@ -9,12 +9,7 @@ INSERT INTO td_role (role)
 INSERT INTO td_user (username, password, email, first_name, last_name, role_id)
 VALUES ('cbprosser', crypt('password', gen_salt('bf',7)), 'cbprosser@tempodeck.com', 'chris', 'prosser', (SELECT role_id FROM td_role WHERE role='Administrator')),
 	   ('mjarsenault', crypt('password', gen_salt('bf',7)), 'mjarsenault@tempodeck.com', 'matt', 'arsenault', (SELECT role_id FROM td_role WHERE role='Administrator')),
-	   ('nbray', crypt('password', gen_salt('bf',7)), 'nbray@tempodeck.com', 'nicholas', 'bray', (SELECT role_id FROM td_role WHERE role='Administrator')),
-	   ('lescobosasainz', crypt('password', gen_salt('bf',7)), 'lescobosa@tempodeck.com', 'luis', 'escobosa', (SELECT role_id FROM td_role WHERE role='Administrator')),
-	   ('hatebear', crypt('password', gen_salt('bf',7)), 'deathntaxes@tempodeck.com', 'Thalia', '', (SELECT role_id FROM td_role WHERE role='Moderator')),
-	   ('no.x.spells', crypt('password', gen_salt('bf',7)), 'fairmagiconly@tempodeck.com', 'Gaddock', 'Teeg', (SELECT role_id FROM td_role WHERE role='Moderator')),
-	   ('monoUDelver', crypt('password', gen_salt('bf',7)), 'delver.of.secrets@tempodeck.com', '', '', (SELECT role_id FROM td_role WHERE role='User')),
-	   ('simicrulezzz', crypt('password', gen_salt('bf',7)), 'pszegana@tempodeck.com', '', '', (SELECT role_id FROM td_role WHERE role='User'));
+	   ('lescobosasainz', crypt('password', gen_salt('bf',7)), 'lescobosa@tempodeck.com', 'luis', 'escobosa', (SELECT role_id FROM td_role WHERE role='Administrator'))
 
 INSERT INTO td_formats (format)
 VALUES ('Commander'), ('Standard'), ('Modern'), ('Pauper'), ('Brawl'), ('Legacy'), ('Vintage');

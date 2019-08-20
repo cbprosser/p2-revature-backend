@@ -1,5 +1,5 @@
 server:
-  port: 8012
+  port: ${PORT:8012}
   
 spring:
   application:
@@ -8,9 +8,9 @@ spring:
   datasource:
     driverClassName: org.postgresql.Driver
     initialization-mode: NEVER
-    password: ${DB_PASSWORD}
-    url: jdbc:postgresql://${DB_URL}:5432/${DB_NAME:td_api}
-    username: ${DB_USERNAME}
+    password: ${TD_API_PASSWORD}
+    url: jdbc:postgresql://${TD_API_URL}:5432/${TD_API_NAME:td_api}
+    username: ${TD_API_USERNAME}
     
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -19,6 +19,6 @@ spring:
       ddl-auto: none
     properties:
       hibernate:
-        default_schema: ${DB_SCHEMA:public}
+        default_schema: ${TD_API_SCHEMA:public}
     show-sql: false
     
