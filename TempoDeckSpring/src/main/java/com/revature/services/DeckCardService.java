@@ -18,8 +18,7 @@ public class DeckCardService {
     private DeckCardRepo deckCardRepo;
 
     private Sort orderBy() {
-        return new Sort(Sort.Direction.ASC, "deck")
-                    .and(new Sort(Sort.Direction.ASC, "card"));
+        return new Sort(Sort.Direction.ASC, "deck").and(new Sort(Sort.Direction.ASC, "card"));
     }
 
     public List<DeckCard> findAll() {
@@ -27,31 +26,37 @@ public class DeckCardService {
         return deckCardRepo.findAll(sortSpec);
     }
 
-	public List<DeckCard> findByDeckID(int deckID) {
-		return deckCardRepo.findByDeckId(deckID);
-	}
+    public List<DeckCard> findByDeckID(int deckID) {
+        return deckCardRepo.findByDeckIdOrderByCardAsc(deckID);
+    }
 
     @Transactional
-	public List<DeckCard> createDeck(List<DeckCard> deck) {
-		return deckCardRepo.saveAll(deck);
-	}
+    public List<DeckCard> createDeck(List<DeckCard> deck) {
+        return deckCardRepo.saveAll(deck);
+    }
 
-    // public Deck findByDeckId(int deckId) {
-    // return null;
-    // }
-
-    // public Deck removeDeck(int deckId) {
-    // return null;
-    // }
-
-    // Examples for reference
-    // public Brand update(Brand br) {
-    // return brandRepo.saveAndFlush(br);
-    // }
-
-    // public Brand addIceCreamToBrand(int brandId, IceCream iceCream) {
-    // Brand br = brandRepo.getOne(brandId);
-    // br.getIceCream().add(iceCream);
-    // return br;
-    // }
+    @Transactional
+    public List<DeckCard> updateDeck(List<DeckCard> deck, int deckID) {
+        List<DeckCard> oldCards = deckCardRepo.findByDeckId(deckID);
+        List<DeckCard> newCards = deck;
+        for (int j = 0; j < oldCards.size(); j++) {
+            boolean delete = true;
+            for (int i = 0; i < newCards.size(); i++) {
+                if (newCards.get(i).getCard().equals(oldCards.get(j).getCard())) {
+                    delete = false;
+                    oldCards.get(j).setCardAmount(newCards.get(i).getCardAmount());
+                    newCards.remove(i);
+                    i--;
+                    break;
+                }
+            }
+            if (delete) {
+                oldCards.get(j).setCardAmount(0);
+            }
+        }
+        deckCardRepo.saveAll(newCards);
+        List<DeckCard> returnCards = deckCardRepo.findByDeckIdOrderByCardAsc(deckID);
+        deckCardRepo.flush();
+        return returnCards;
+    }
 }

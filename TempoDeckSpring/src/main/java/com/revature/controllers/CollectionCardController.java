@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -96,6 +97,9 @@ public class CollectionCardController {
             if (dbCollection == null) {
                 dbCollection = card.getCollection();
             }
+            if(card.getAmount() == 0) {
+                continue;
+            }
              String cardString = card.getAmount() + "x " + card.getCard();
                 cards.add(cardString);
             
@@ -122,7 +126,7 @@ public class CollectionCardController {
     }
 
     @PostMapping("/old")
-    public List<CollectionCard> createDeck(@RequestBody List<CollectionCard> collection) {
+    public List<CollectionCard> createCollection(@RequestBody List<CollectionCard> collection) {
         if (collection.size() > 0) {
             Collection newCollection = collectionService.save(collection.get(0).getCollection());
             collection.forEach(card -> {
@@ -134,7 +138,7 @@ public class CollectionCardController {
     }
 
     @PostMapping
-    public CollectionConvertedWithCards createDeck(@RequestBody CollectionConvertedWithCards newCollection) {
+    public CollectionConvertedWithCards createCollection(@RequestBody CollectionConvertedWithCards newCollection) {
         Collection newDBCollection = new Collection(
             newCollection.getId(), 
             new User(
@@ -162,10 +166,58 @@ public class CollectionCardController {
             }
         }
 
-        List<CollectionCard> createdDBDeck = createDeck(newDBCollectionCard);
+        List<CollectionCard> createdDBDeck = createCollection(newDBCollectionCard);
 
         return convertToDTO(createdDBDeck);
     }
 
+    @PutMapping("/old")
+    public List<CollectionCard> updateCollection(@RequestBody List<CollectionCard> collection) {
+        if (collection.size() > 0) {
+            Collection newCollection = collectionService.save(collection.get(0).getCollection());
+            collection.forEach(card -> {
+                card.setCollection(newCollection);
+            });
+            return collectionCardService.updateCollection(collection, collection.get(0).getCollection().getId());
+        }
+        return null;
+    }
 
+    @PutMapping
+    public CollectionConvertedWithCards updateDeck(@RequestBody CollectionConvertedWithCards reqCollection) {
+        Collection dbDeckToUpdate = new Collection(
+            reqCollection.getId(), 
+            new User(
+                reqCollection.getAuthor().getId(), 
+                reqCollection.getAuthor().getUsername(), 
+                null, 
+                reqCollection.getAuthor().getFirstName(), 
+                reqCollection.getAuthor().getLastName(), 
+                reqCollection.getAuthor().getEmail(), 
+                reqCollection.getAuthor().getRole()), 
+            reqCollection.isPrivate(), 
+            reqCollection.isPrototype(), 
+            null, 
+            null, 
+            reqCollection.getCollectionName(), 
+            reqCollection.getCollectionDescription(), 
+            reqCollection.getFeaturedCard());
+
+        List<CollectionCard> dbCollectionCardUpdated = new ArrayList<>();
+        for (String cardString : reqCollection.getCards()) {
+            if (cardString.contains("x ")) {
+                int cardAmount = Integer.parseInt(cardString.substring(0, cardString.indexOf("x ")));
+                String card = cardString.substring(cardString.indexOf("x ") + 2);
+                dbCollectionCardUpdated.add(new CollectionCard(0, dbDeckToUpdate, card, cardAmount));
+            }
+        }
+
+        System.out.println(dbCollectionCardUpdated);
+
+        List<CollectionCard> updatedDBCollection = updateCollection(dbCollectionCardUpdated);
+
+        System.out.println(updatedDBCollection);
+
+        return convertToDTO(updatedDBCollection);
+    }
 }

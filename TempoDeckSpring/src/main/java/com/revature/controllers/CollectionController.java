@@ -12,6 +12,8 @@ import com.revature.services.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -137,5 +139,29 @@ public class CollectionController {
             ));
         });
         return collections;
+    }
+    
+    @PutMapping
+    public CollectionConvertedNoCards updateCollection(@RequestBody CollectionConvertedNoCards collection) {
+        Collection dbCollection = collectionService.updateCollection(collection);
+        User author = dbCollection.getAuthor();
+        return new CollectionConvertedNoCards(
+            dbCollection.getId(), new UserConverted(
+                author.getId(), 
+                author.getUsername(), 
+                author.getFirstName(), 
+                author.getLastName(), 
+                author.getEmail(), 
+                author.getRole()), 
+                dbCollection.getName(), 
+                dbCollection.getDescription(), 
+                dbCollection.isPrivate(), 
+                dbCollection.isPrototype(),
+                dbCollection.getFeaturedCard());
+    }
+
+    @PutMapping("/old")
+    public Collection updateDeckOld(@RequestBody Collection collection) {
+        return collectionService.updateCollection(collection);
     }
 }
