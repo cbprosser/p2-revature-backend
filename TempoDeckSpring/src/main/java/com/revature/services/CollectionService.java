@@ -44,8 +44,8 @@ public class CollectionService {
 		collectionToUpdate.setDescription(collection.getDescription());
 		collectionToUpdate.setFeaturedCard(collection.getFeaturedCard());
 		collectionToUpdate.setName(collection.getName());
-		collectionToUpdate.setPrivate(collection.isPrivate());
-		collectionToUpdate.setPrototype(collection.isPrototype());
+		collectionToUpdate.setPrivate(collection.getIsPrivate());
+		collectionToUpdate.setPrototype(collection.getIsPrototype());
 		return collectionToUpdate;
 	}
 
@@ -55,8 +55,8 @@ public class CollectionService {
 		collectionToUpdate.setDescription(collection.getCollectionDescription());
 		collectionToUpdate.setFeaturedCard(collection.getFeaturedCard());
 		collectionToUpdate.setName(collection.getCollectionName());
-		collectionToUpdate.setPrivate(collection.isPrivate());
-		collectionToUpdate.setPrototype(collection.isPrototype());
+		collectionToUpdate.setPrivate(collection.getIsPrivate());
+		collectionToUpdate.setPrototype(collection.getIsPrototype());
 		return collectionToUpdate;
 	}
 }

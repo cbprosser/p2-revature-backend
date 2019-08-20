@@ -47,8 +47,8 @@ public class CollectionController {
                 ),
                 collection.getName(),
                 collection.getDescription(),
-                collection.isPrivate(),
-                collection.isPrototype(),
+                collection.getIsPrivate(),
+                collection.getIsPrototype(),
                 collection.getFeaturedCard()
             ));
         });
@@ -74,8 +74,8 @@ public class CollectionController {
                 author.getRole()), 
             dbCollection.getName(), 
             dbCollection.getDescription(), 
-            dbCollection.isPrivate(), 
-            dbCollection.isPrototype(),
+            dbCollection.getIsPrivate(), 
+            dbCollection.getIsPrototype(),
             dbCollection.getFeaturedCard());
     }
 
@@ -102,8 +102,8 @@ public class CollectionController {
                 ),
                 collection.getName(),
                 collection.getDescription(),
-                collection.isPrivate(),
-                collection.isPrototype(),
+                collection.getIsPrivate(),
+                collection.getIsPrototype(),
                 collection.getFeaturedCard()
             ));
         });
@@ -133,8 +133,8 @@ public class CollectionController {
                 ),
                 collection.getName(),
                 collection.getDescription(),
-                collection.isPrivate(),
-                collection.isPrototype(),
+                collection.getIsPrivate(),
+                collection.getIsPrototype(),
                 collection.getFeaturedCard()
             ));
         });
@@ -155,8 +155,8 @@ public class CollectionController {
                 author.getRole()), 
                 dbCollection.getName(), 
                 dbCollection.getDescription(), 
-                dbCollection.isPrivate(), 
-                dbCollection.isPrototype(),
+                dbCollection.getIsPrivate(), 
+                dbCollection.getIsPrototype(),
                 dbCollection.getFeaturedCard());
     }
 

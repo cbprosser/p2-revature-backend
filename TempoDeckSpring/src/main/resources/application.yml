@@ -8,9 +8,9 @@ spring:
   datasource:
     driverClassName: org.postgresql.Driver
     initialization-mode: NEVER
-    password: ${TD_API_PASSWORD}
-    url: jdbc:postgresql://${TD_API_URL}:5432/${TD_API_NAME:td_api}
-    username: ${TD_API_USERNAME}
+    password: hunter2
+    url: jdbc:postgresql://localhost:5432/${TD_API_NAME:td_api}
+    username: postgres
     
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
