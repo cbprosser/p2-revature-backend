@@ -20,6 +20,5 @@ public interface DeckCardRepo extends JpaRepository<DeckCard, Integer> {
 
 	List<DeckCard> findByDeckIdOrderByCardDesc(int deckID);
 
-	List<DeckCard> findByDeckIdOrderByCardAsc(int deckID);
-	
+	List<DeckCard> findByDeckIdOrderByCardAsc(int deckID);	
 }
