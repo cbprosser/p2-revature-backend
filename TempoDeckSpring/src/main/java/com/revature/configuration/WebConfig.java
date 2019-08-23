@@ -50,7 +50,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // all endpoints in the api
-            .allowedOrigins("http://localhost:8012", "http://localhost:3000", "http://tempodeck.frontend.s3-website-us-east-1.amazonaws.com/") // allow this origin
+            .allowedOrigins("http://localhost:8012", "http://localhost:3000", "http://tempodeck.frontend.s3-website-us-east-1.amazonaws.com") // allow this origin
             .allowedMethods("PUT", "DELETE", "GET", "OPTIONS", "POST", "PATCH")
             .allowedHeaders("content-type", "header2", "Authorization")
 //            .exposedHeaders("header1", "header2")
